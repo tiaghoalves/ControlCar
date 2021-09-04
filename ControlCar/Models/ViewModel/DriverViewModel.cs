@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
-
-namespace ControlCar.Models
+namespace ControlCar.Models.ViewModel
 {
-    public partial class Driver
+    public class DriverViewModel
     {
-        public Driver()
-        {
-            Scheduling = new HashSet<Scheduling>();
-        }
-
         public int IdDriver { get; set; }
 
         [Display(Name = "Nome")]
@@ -29,7 +22,5 @@ namespace ControlCar.Models
         public DateTime? BirthDate { get; set; }
         public string Sector { get; set; }
         public decimal Rg { get; set; }
-
-        public virtual ICollection<Scheduling> Scheduling { get; set; }
     }
 }
