@@ -1,220 +1,209 @@
 use ControlCar;
 
-drop table Agendamento;
-drop table VeiculoManutencao;
-drop table Veiculo;
-drop table StatusVeiculo;
-drop table StatusAgendamento;
-drop table Autenticacao;
-drop table Manutencao;
-drop table Rota;
-drop table Motorista;
+drop table Scheduling;
+drop table MaintenanceVehicle;
+drop table Vehicle;
+drop table StatusVehicle;
+drop table StatusScheduling;
+drop table [Authentication];
+drop table Maintenance;
+drop table [Route];
+drop table Driver;
 
 --
--- MOTORISTAS
+-- Driver
 --
-create table Motorista (
-   IdMotorista                int           not null -- Identificador do motorista
-  ,Nome                        varchar(25)   not null -- Nome do motorista cadastrado
-  ,Cpf                         varchar(11)   not null -- CPF do motorista cadastrado
-  ,DataVencimentoCnh         datetime      not null -- Data de vencimento da CNH do motorista
-  ,Cargo                       varchar(10)       null -- Cargo do motorista cadastrado
-  ,Endereco                    varchar(30)       null -- Endereço do motorista
-  ,Celular                     varchar(11)       null -- Número de celular do motorista
-  ,TipoMotorista              varchar(10)       null -- Tipo de motorista, caro, van
-  ,DataNascimento             datetime          null -- Data de nascimento do motorista
-  ,Setor                       varchar(10)       null -- Setor em que o motorista trabalha
-  ,Rg                          numeric(10)   not null -- Número do RG do motorista
-  ,constraint pk_motorista primary key nonclustered (idmotorista)
+create table Driver(
+   IdDriver                int           not null -- Driver identifier
+  ,Name                        varchar(25)   not null -- Registered Driver Name
+  ,Cpf                         varchar(11)   not null -- CPF of the registered Driver
+  ,ExpirationDateCnh         datetime      not null -- expiration date of CNH Driver
+  ,Office                       varchar(10)       null -- Registered Driver's Office
+  ,Address                    varchar(30)       null -- Driver Address
+  ,Cellphone                     varchar(11)       null -- Driver Cellphone Number
+  ,TypeDriver              varchar(10)       null -- Driver type, car, van
+  ,BirthDate             datetime          null -- Driver's date of birth
+  ,Sector                       varchar(10)       null -- Sector in which the Driver works
+  ,Rg                          numeric(10)   not null -- Driver RG number
+  ,constraint pk_Driver primary key nonclustered (idDriver)
 );
-exec sys.sp_addextendedproperty "ms_description", "Identificador do motorista (PK)", "user", "dbo", "table", "motorista", "column", "idmotorista"
-exec sys.sp_addextendedproperty "ms_description", "Nome do motorista cadastrado", "user", "dbo", "table", "motorista", "column", "nome"
-exec sys.sp_addextendedproperty "ms_description", "Cpf do motorista cadastrado", "user", "dbo", "table", "motorista", "column", "cpf"
-exec sys.sp_addextendedproperty "ms_description", "Data de vencimento da cnh do motorista", "user", "dbo", "table", "motorista", "column", "datavencimentocnh"
-exec sys.sp_addextendedproperty "ms_description", "Cargo do motorista cadastrado", "user", "dbo", "table", "motorista", "column", "cargo"
-exec sys.sp_addextendedproperty "ms_description", "Endereço do motorista", "user", "dbo", "table", "motorista", "column", "endereco"
-exec sys.sp_addextendedproperty "ms_description", "Número de celular do motorista", "user", "dbo", "table", "motorista", "column", "celular"
-exec sys.sp_addextendedproperty "ms_description", "Tipo de motorista, caro, van", "user", "dbo", "table", "motorista", "column", "tipomotorista"
-exec sys.sp_addextendedproperty "ms_description", "Data de nascimento do motorista", "user", "dbo", "table", "motorista", "column", "datanascimento"
-exec sys.sp_addextendedproperty "ms_description", "Setor em que o motorista trabalha", "user", "dbo", "table", "motorista", "column", "setor"
-exec sys.sp_addextendedproperty "ms_description", "Número do rg do motorista", "user", "dbo", "table", "motorista", "column", "rg"
+
+
 --
--- ROTAS
+-- Route
 --
-create table Rota(
-   IdRota                          int           not null -- Identificador da rota
-  ,Origem                           varchar(50)       null -- Cidade de origem da rota
-  ,Destino                          varchar(50)       null -- Cidade de destino da rota
-  ,KmPadrao                        float             null -- Distância padrão para a rota
-  ,constraint pk_rota primary key nonclustered (idrota)
+create table Route(
+   IdRoute                          int           not null -- Route Identifier
+  ,Source                           varchar(50)       null -- Route's city of origin
+  ,Destiny                          varchar(50)       null -- Route destination city
+  ,KmPattern                        float             null -- Default Distance to Route
+  ,constraint pk_Route primary key nonclustered (idRoute)
 );
-exec sys.sp_addextendedproperty "ms_description", "Identificador da rota (PK)", "user", "dbo", "table", "rota", "column",        "idrota"
-exec sys.sp_addextendedproperty "ms_description", "Cidade de origem da rota", "user", "dbo", "table", "rota", "column",     "origem"
-exec sys.sp_addextendedproperty "ms_description", "Cidade de destino da rota", "user", "dbo", "table", "rota", "column",    "destino"
-exec sys.sp_addextendedproperty "ms_description", "Distância padrão para a rota", "user", "dbo", "table", "rota", "column", "kmpadrao"
+
 --
--- MANUTENÇÃO
+-- MAINTENANCE
 --
-create table Manutencao(
-   IdManutencao       int          not null -- Identificador de manutenção
-  ,Descricao           varchar(100) not null -- Descrição da manutenção
-  ,Periodicidade       datetime      not null -- Intervalo de tempo para cada manutenção
-  ,constraint pk_manutencao primary key nonclustered (idmanutencao)
+create table Maintenance(
+   IdMaintenance       int          not null -- Maintenance identifier
+  ,[Description]           varchar(100) not null -- Maintenance Description
+  ,Frequency       datetime      not null -- Time interval for each Maintenance
+  ,constraint pk_maintenance primary key nonclustered (idmaintenance)
 );
-exec sys.sp_addextendedproperty "ms_description", "Identificador de manutenção (PK)", "user", "dbo", "table", "manutencao", "column","idmanutencao"
-exec sys.sp_addextendedproperty "ms_description", "Descrição da manutenção", "user", "dbo", "table", "manutencao", "column","descricao"    
-exec sys.sp_addextendedproperty "ms_description", "Intervalo de tempo para cada manutenção", "user", "dbo", "table", "manutencao", "column","periodicidade"
+-- exec sys.sp_addextendedproperty "ms_description", "Maintenance identifier (PK)", "user", "dbo", "table", "maintenance", "column","idMaintenance"
+-- exec sys.sp_addextendedproperty "ms_description", "Maintenance Description", "user", "dbo", "table", "maintenance", "column","description"    
+-- exec sys.sp_addextendedproperty "ms_description", "Time interval for each maintenance", "user", "dbo", "table", "maintenance", "column","frequency"
+
 --
--- AUTENTICAÇÃO
+-- AUTHENTICATION
 --
-create table Autenticacao(
-   IdAutenticacao      int           not null -- Identificador da  autenticação
-  ,Usuario              varchar(100)  not null -- Nome do usuário Administrador
-  ,Email                varchar(100)  not null -- Endereço de e-mail do usuário administrador
-  ,Senha                varchar(100)  not null -- Senha do usuário administrador
-  ,constraint pk_autenticacao primary key nonclustered (idautenticacao)
+create table Authentication(
+   IdAuthentication      int           not null -- Authentication identifier
+  ,[User]                 varchar(100)  not null -- Admin User Name
+  ,Email                varchar(100)  not null -- Admin user email address
+  ,[Password]                varchar(100)  not null -- Admin user password
+  ,constraint pk_autentication primary key nonclustered (IdAuthentication)
 );
-exec sys.sp_addextendedproperty "ms_description", "Identificador da  autenticação (PK)", "user", "dbo", "table", "autenticacao", "column","idautenticacao"
-exec sys.sp_addextendedproperty "ms_description", "Nome do usuário Administrador", "user", "dbo", "table", "autenticacao", "column","usuario"    
-exec sys.sp_addextendedproperty "ms_description", "Endereço de e-mail do usuário administrador", "user", "dbo", "table", "autenticacao", "column","email"
-exec sys.sp_addextendedproperty "ms_description", "Senha do usuário administrador", "user", "dbo", "table", "autenticacao", "column","senha"
+-- exec sys.sp_addextendedproperty "ms_description", "Authentication identifier (PK)", "user", "dbo", "table", "authentication", "column","idAuthentication"
+-- exec sys.sp_addextendedproperty "ms_description", "Admin User Name", "user", "dbo", "table", "authentication", "column","user"    
+-- exec sys.sp_addextendedproperty "ms_description", "Admin user email address", "user", "dbo", "table", "authentication", "column","email"
+-- exec sys.sp_addextendedproperty "ms_description", "Admin user password", "user", "dbo", "table", "authentication", "column","password"
 --
--- STATUS AGENDAMENTO
+-- STATUS Scheduling
 --
-create table StatusAgendamento(
-   IdstatusAgendamento        int          not null  -- Identificador de status de agendamento
-  ,Descricao                    varchar(100) not null  -- Status do agendamento
-  ,constraint pk_status_agendamento primary key nonclustered (idstatusagendamento)
+create table StatusScheduling(
+   IdstatusScheduling        int          not null  -- Scheduling status identifier
+  ,Description                    varchar(100) not null  -- Scheduling Status
+  ,constraint pk_status_Scheduling primary key nonclustered (idstatusscheduling)
 );
-exec sys.sp_addextendedproperty "ms_description", "Identificador de status de agendamento (PK)", "user", "dbo", "table", "statusagendamento", "column","idstatusagendamento"
-exec sys.sp_addextendedproperty "ms_description", "Status do agendamento", "user", "dbo", "table", "statusagendamento", "column","descricao"
+--exec sys.sp_addextendedproperty "ms_description", "Scheduling status identifier (PK)", "user", "dbo", "table", "statusScheduling", "column","idStatusScheduling"
+--exec sys.sp_addextendedproperty "ms_description", "Scheduling Status", "user", "dbo", "table", "statusScheduling", "column","description"
 --
 -- STATUS VEÍCULO
 --
-create table StatusVeiculo(
-   IdstatusVeiculo    int          not null  -- Identificador de status do veículo
-  ,Descricao            varchar(100) not null  -- Status de veículo
-  ,constraint pk_status_veiculo primary key nonclustered (idstatusveiculo)
+create table StatusVehicle(
+   IdstatusVehicle    int          not null  -- Vehicle Status Identifier
+  ,Description            varchar(100) not null  -- Vehicle status
+  ,constraint pk_status_vehicle primary key nonclustered (idstatusvehicle)
 );
-exec sys.sp_addextendedproperty "ms_description", "Identificador de status do veículo (PK)", "user", "dbo", "table", "statusveiculo", "column","idstatusveiculo"
-exec sys.sp_addextendedproperty "ms_description", "Status de veículo", "user", "dbo", "table", "statusveiculo", "column","descricao"
+-- exec sys.sp_addextendedproperty "ms_description", "Vehicle Status Identifier (PK)", "user", "dbo", "table", "statusvehicle", "column","idStatusVehicle"
+-- exec sys.sp_addextendedproperty "ms_description", "Vehicle status", "user", "dbo", "table", "statusvehicle", "column","description"
 --
--- VEICULOS
+-- Vehicles
 --
-create table Veiculo(
-   IdVeiculo            int           not null -- Identificador do veículo
-  ,Modelo                varchar(10)       null -- Modelo do veiculo
-  ,Km                    float         not null -- Quilometragem atual do veículo
-  ,Placa                 varchar(20)   not null -- Identificação da placa do veículo
-  ,Tipo                  varchar(10)       null -- Identificação do tipo do veículo
-  ,Marca                 varchar(10)       null -- Descrição do modelo do veículo
-  ,Cor                   varchar(100)      null -- Descrição da cor do veículo
-  ,Ano                   datetime      not null -- Ano de fabricação do veículo
-  ,Renavam               numeric       not null -- Número do documento do veículo
-  ,Chassi                numeric       not null -- Número da marcação do chassi
-  ,IdStatusVeiculo     int               null -- Identificação de status do veículo
-  ,Observacao            varchar(300)  not null -- Observação do veículo
-  ,constraint pk_veiculo primary key nonclustered (idveiculo)
-  , constraint fk_veiculo_statusveiculo foreign key (idstatusveiculo)
-    references StatusVeiculo (idstatusveiculo)
+create table Vehicle(
+   IdVehicle            int           not null -- Vehicle identifier
+  ,Model                varchar(10)       null -- Vehicle Model
+  ,Km                    float         not null -- Current vehicle mileage
+  ,Board                 varchar(20)   not null -- Vehicle license board identification
+  ,Type                  varchar(10)       null -- Vehicle Type Identification
+  ,Brand                 varchar(10)       null -- Vehicle model description
+  ,Color                 varchar(100)      null -- Vehicle color description
+  ,Year                  datetime      not null -- Year of manufacture of the vehicle
+  ,Renavam               numeric       not null -- Vehicle document number
+  ,Chassi                numeric       not null -- Chassi Marking Number
+  ,IdStatusVehicle       int               null -- Vehicle Status Identification
+  ,Observation            varchar(300)  not null -- Vehicle observation
+  ,constraint pk_Vehicle primary key nonclustered (idVehicle)
+  , constraint fk_Vehicle_statusVehicle foreign key (idstatusVehicle)
+    references StatusVehicle (idstatusVehicle)
     on delete cascade
     on update cascade
 );
-exec sys.sp_addextendedproperty "ms_description", "Identificador do veículo (PK)", "user", "dbo", "table", "veiculo", "column", "idveiculo"        
-exec sys.sp_addextendedproperty "ms_description", "Modelo do veiculo", "user", "dbo", "table", "veiculo", "column","modelo"           
-exec sys.sp_addextendedproperty "ms_description", "Quilometragem atual do veículo", "user", "dbo", "table", "veiculo", "column","km"               
-exec sys.sp_addextendedproperty "ms_description", "Identificação da placa do veículo", "user", "dbo", "table", "veiculo", "column","placa"
-exec sys.sp_addextendedproperty "ms_description", "Identificação do tipo do veículo", "user", "dbo", "table", "veiculo", "column","tipo"             
-exec sys.sp_addextendedproperty "ms_description", "Descrição do modelo do veículo", "user", "dbo", "table", "veiculo", "column","marca"            
-exec sys.sp_addextendedproperty "ms_description", "Descrição da cor do veículo", "user", "dbo", "table", "veiculo", "column","cor"              
-exec sys.sp_addextendedproperty "ms_description", "Ano de fabricação do veículo", "user", "dbo", "table", "veiculo", "column","ano"
-exec sys.sp_addextendedproperty "ms_description", "Número do documento do veículo", "user", "dbo", "table", "veiculo", "column","renavam"          
-exec sys.sp_addextendedproperty "ms_description", "Número da marcação do chassi", "user", "dbo", "table", "veiculo", "column","chassi"           
---exec sys.sp_addextendedproperty "ms_description", "Identificação de manutenção (FK MANUTENCAO)", "user", "dbo", "table", "veiculo", "column","id_manutencao"    
-exec sys.sp_addextendedproperty "ms_description", "Identificação de status do veículo (FK STATUSVEICULO)", "user", "dbo", "table", "veiculo", "column","idstatusveiculo"
-exec sys.sp_addextendedproperty "ms_description", "Observação do veículo", "user", "dbo", "table", "veiculo", "column","observacao"
+--exec sys.sp_addextendedproperty "ms_description", "Vehicle identifier (PK)", "user", "dbo", "table", "vehicle", "column", "idVehicle"        
+--exec sys.sp_addextendedproperty "ms_description", "Vehicle Model", "user", "dbo", "table", "vehicle", "column","model"           
+--exec sys.sp_addextendedproperty "ms_description", "Current vehicle mileage", "user", "dbo", "table", "vehicle", "column","km"               
+--exec sys.sp_addextendedproperty "ms_description", "Vehicle license board identification", "user", "dbo", "table", "vehicle", "column","board"
+--exec sys.sp_addextendedproperty "ms_description", "Vehicle Type Identification", "user", "dbo", "table", "vehicle", "column","type"             
+--exec sys.sp_addextendedproperty "ms_description", "Vehicle model description", "user", "dbo", "table", "vehicle", "column","brand"            
+--exec sys.sp_addextendedproperty "ms_description", "Vehicle color description", "user", "dbo", "table", "vehicle", "column","color"              
+--exec sys.sp_addextendedproperty "ms_description", "Year of manufacture of the vehicle", "user", "dbo", "table", "vehicle", "column","year"
+--exec sys.sp_addextendedproperty "ms_description", "Vehicle document number", "user", "dbo", "table", "vehicle", "column","renavam"          
+--exec sys.sp_addextendedproperty "ms_description", "Chassi Marking Number", "user", "dbo", "table", "vehicle", "column","chassi"           
+--exec sys.sp_addextendedproperty "ms_description", "Vehicle Status Identification (FK MAINTENANCE)", "user", "dbo", "table", "vehicle", "column","id_maintenance"    
+-- exec sys.sp_addextendedproperty "ms_description", "Vehicle Status Identification (FK STATUSVehicle)", "user", "dbo", "table", "vehicle", "column","idstatusVehicle"
+-- exec sys.sp_addextendedproperty "ms_description", "Vehicle observation", "user", "dbo", "table", "Vehicle", "column","observation"
 --
--- VEÍCULO MANUTENCAO
+-- VEHICLE MAINTENANCE
 --
-create table VeiculoManutencao(
-   IdVeiculoManutencao    int          not null   -- Identificador do veiculo manutencao
-  ,IdVeiculo               int          not null   -- Identificador do veículo
-  ,IdManutencao            int           not null   -- Identificador de manutenção
-  ,DataManutencao          datetime   not null   -- Data da manutenção
-  ,constraint pk_veicmanu primary key nonclustered (idveiculomanutencao)
-  , constraint fk_veicmanu_manutencao foreign key (idmanutencao)
-    references manutencao (idmanutencao)
+create table VehicleMaintenance(
+   IdVehicleMaintenance    int          not null   -- Maintenance Vehicle Identifier
+  ,IdVehicle               int          not null   -- Vehicle identifier
+  ,IdMaintenance           int           not null   -- Maintenance identifier
+  ,DateMaintenance          datetime   not null   -- Date Maintenance 
+  ,constraint pk_veicmanu primary key nonclustered (idVehiclemaintenance)
+  , constraint fk_veicmanu_maintenance foreign key (idmaintenance)
+    references maintenance (idmaintenance)
   on update no action 
   on delete no action
-  , constraint fk_veicmanu_veiculo foreign key (idveiculo)
-    references veiculo (idveiculo)
+  , constraint fk_veicmanu_Vehicle foreign key (idVehicle)
+    references Vehicle (idVehicle)
   on update no action 
   on delete no action
 );
-exec sys.sp_addextendedproperty "ms_description", "Identificador do veiculo manutencao (PK)", "user", "dbo", "table", "veiculomanutencao", "column","idveiculomanutencao"
-exec sys.sp_addextendedproperty "ms_description", "Identificador do veículo (FK VEICULO)", "user", "dbo", "table", "veiculomanutencao", "column", "idveiculo" 
-exec sys.sp_addextendedproperty "ms_description", "Identificador de manutenção (FK MANUTENCAO)", "user", "dbo", "table", "veiculomanutencao", "column","idmanutencao"
-exec sys.sp_addextendedproperty "ms_description", "Data da manutenção", "user", "dbo", "table", "veiculomanutencao", "column","datamanutencao"
+--exec sys.sp_addextendedproperty "ms_description", "Maintenance Vehicle Identifier (PK)", "user", "dbo", "table", "vehiclemaintenance", "column","idVehiclemaintenance"
+--exec sys.sp_addextendedproperty "ms_description", "Vehicle identifier (FK VEHICLE", "user", "dbo", "table", "vehiclemaintenance", "column", "idVehicle" 
+--exec sys.sp_addextendedproperty "ms_description", "Maintenance identifier (FK MAINTENANCE)", "user", "dbo", "table", "vehiclemaintenance", "column","idmaintenance"
+--exec sys.sp_addextendedproperty "ms_description", "Date Maintenance", "user", "dbo", "table", "vehiclemaintenance", "column","datemaintenance"
 --
--- AGENDAMENTOS
+-- SchedulingS
 --
-create table Agendamento(
-   IdAgendamento             int        not null -- Identificador do Agendamento
-  ,DataInicialPrevista      datetime   not null -- Data Inicial Prevista do Agendamento
-  ,DataFinalPrevista        datetime   not null -- Data Final Prevista do Agendamento
-  ,IdRota                    int            null -- Identificação da rota
-  ,IdVeiculo                 int            null -- Identificação do veículo
-  ,IdMotorista               int            null -- Identificação do motorista
-  ,DataInicialRealizada     datetime       null -- Data Inicial do Agendamento Realizado
-  ,DataFinalRealizada       datetime       null -- Data Final do Agendamento Realizado
-  ,KmFinal                   float          null -- Identificação de quilometragem percorrida
-  ,IdStatusAgendamento      int            null -- Identificação de status, finalizada em
-  ,IdAutenticacao            int            null -- Identificação da autenticação
-  ,constraint pk_agendamento primary key nonclustered (idagendamento)
-  , constraint fk_agendamento_rota foreign key (idrota)
-    references Rota (idrota)
+create table Scheduling(
+   IdScheduling             int        not null -- Scheduling identifier
+  ,ExpectedStartDate      datetime   not null -- Scheduled Scheduling Start Date
+  ,ExpectedEndDate        datetime   not null -- Scheduled Scheduling End Date
+  ,IdRoute                    int            null -- Route identification
+  ,IdVehicle                 int            null -- Vehicle identification
+  ,IdDriver               int            null -- Driver Identification
+  ,StartDatePerformed     datetime       null -- Start Date of Scheduling Performed
+  ,EndDatePerformed       datetime       null -- End date of appointment made
+  ,EndKm                   float          null -- Mileage covered identification
+  ,IdStatusScheduling      int            null -- Status identification, ending in
+  ,IdAuthentication           int            null -- Authentication identification
+  ,constraint pk_Scheduling primary key nonclustered (idScheduling)
+  , constraint fk_Scheduling_Route foreign key (idRoute)
+    references Route (idRoute)
     on delete cascade
     on update cascade
-  , constraint fk_agendamento_veiculo foreign key (idveiculo)
-    references Veiculo (idveiculo)
+  , constraint fk_Scheduling_Vehicle foreign key (idVehicle)
+    references Vehicle (idVehicle)
     on delete cascade
     on update cascade
-  , constraint fk_agendamento_motorista foreign key (idmotorista)
-    references Motorista (idmotorista)
+  , constraint fk_Scheduling_Driver foreign key (idDriver)
+    references Driver (idDriver)
     on delete cascade
     on update cascade
-  , constraint fk_agendamento_status_agendamento foreign key (idstatusagendamento)
-    references StatusAgendamento (idstatusagendamento)
+  , constraint fk_Scheduling_status_Scheduling foreign key (idstatusScheduling)
+    references StatusScheduling (idstatusScheduling)
     on delete cascade
     on update cascade
-  , constraint fk_agendamento_autenticacao foreign key (idautenticacao)
-    references Autenticacao (idautenticacao)
+  , constraint fk_Scheduling_authentication foreign key (idScheduling)
+    references Authentication (idAuthentication)
     on delete cascade
     on update cascade
 );
-exec sys.sp_addextendedproperty "ms_description", "Identificador do Agendamento (PK)", "user", "dbo", "table", agendamento, "column", "idagendamento"
-exec sys.sp_addextendedproperty "ms_description", "Data Inicial Prevista do Agendamento", "user", "dbo", "table", agendamento, "column", "datainicialprevista"
-exec sys.sp_addextendedproperty "ms_description", "Data Final Prevista do Agendamento", "user", "dbo", "table", agendamento, "column", "datafinalprevista"
-exec sys.sp_addextendedproperty "ms_description", "Identificação da rota (FK ROTAS)", "user", "dbo", "table", agendamento, "column", "idrota"
-exec sys.sp_addextendedproperty "ms_description", "Identificação do veículo (FK VEICULOS)", "user", "dbo", "table", agendamento, "column", "idveiculo"
-exec sys.sp_addextendedproperty "ms_description", "Identificação do motorista (FK MOTORISTAS)", "user", "dbo", "table", agendamento, "column", "idmotorista"
-exec sys.sp_addextendedproperty "ms_description", "Data Inicial do Agendamento Realizado", "user", "dbo", "table", agendamento, "column", "datainicialrealizada" 
-exec sys.sp_addextendedproperty "ms_description", "Data Final do Agendamento Realizado", "user", "dbo", "table", agendamento, "column", "datafinalrealizada" 
-exec sys.sp_addextendedproperty "ms_description", "Quilometragem percorrida", "user", "dbo", "table", agendamento, "column", "kmfinal"
-exec sys.sp_addextendedproperty "ms_description", "Identificação de status, finalizada em (FK STATUSAGENDAMENTO)", "user", "dbo", "table", agendamento, "column", "idstatusagendamento" 
-exec sys.sp_addextendedproperty "ms_description", "Identificação da autenticação (FK AUTENTICACAO)", "user", "dbo", "table", agendamento, "column", "idautenticacao"
+--exec sys.sp_addextendedproperty "ms_description", "Scheduling identifier (PK)", "user", "dbo", "table", scheduling, "column", "idScheduling"
+--exec sys.sp_addextendedproperty "ms_description", "Scheduled Scheduling Start Date", "user", "dbo", "table", scheduling, "column", "expectedstartdate"
+--exec sys.sp_addextendedproperty "ms_description", " Scheduled Scheduling End Date", "user", "dbo", "table", scheduling, "column", "expectedenddate"
+--exec sys.sp_addextendedproperty "ms_description", "Route identification (FK RouteS)", "user", "dbo", "table", scheduling, "column", "idRoute"
+--exec sys.sp_addextendedproperty "ms_description", "Vehicle identification (FK VehicleS)", "user", "dbo", "table", scheduling, "column", "idVehicle"
+--exec sys.sp_addextendedproperty "ms_description", "Driver Identification (FK DriverS)", "user", "dbo", "table", scheduling, "column", "idDriver"
+--exec sys.sp_addextendedproperty "ms_description", "Start Date of Scheduling Performed", "user", "dbo", "table", scheduling, "column", "startdateperformed" 
+--exec sys.sp_addextendedproperty "ms_description", "End date of appointment made", "user", "dbo", "table", scheduling, "column", "enddateperformed" 
+--exec sys.sp_addextendedproperty "ms_description", "Mileage covered identification", "user", "dbo", "table", scheduling, "column", "endkm"
+--exec sys.sp_addextendedproperty "ms_description", "Status identification, ending in (FK STATUSSCHEDULING)", "user", "dbo", "table", scheduling, "column", "idstatusscheduling" 
+--exec sys.sp_addextendedproperty "ms_description", "Authentication identification (FK AUTHENTICATION)", "user", "dbo", "table", scheduling, "column", "idauthentication"
                                                  
-INSERT INTO [motorista]
-           ([idmotorista]
-           ,[nome]
+INSERT INTO [Driver]
+           ([idDriver]
+           ,[Name]
            ,[cpf]
-           ,[datavencimentocnh]
-           ,[cargo]
-           ,[endereco]
-           ,[celular]
-           ,[tipomotorista]
-           ,[datanascimento]
-           ,[setor]
+           ,[ExpirationDatecnh]
+           ,[Office]
+           ,[Address]
+           ,[Cellphone]
+           ,[TypeDriver]
+           ,[BirthDate]
+           ,[Sector]
            ,[rg])
      VALUES
            (1
@@ -226,21 +215,21 @@ INSERT INTO [motorista]
            ,'05491921555'
            ,'CARRO'
            ,'19900415 10:34:09'
-           ,'FROTA'
+           ,'FRoute'
            ,9000000009
        )
 --
-INSERT INTO [motorista]
-           ([idmotorista]
-           ,[nome]
+INSERT INTO [Driver]
+           ([idDriver]
+           ,[Name]
            ,[cpf]
-           ,[datavencimentocnh]
-           ,[cargo]
-           ,[endereco]
-           ,[celular]
-           ,[tipomotorista]
-           ,[datanascimento]
-           ,[setor]
+           ,[ExpirationDatecnh]
+           ,[Office]
+           ,[Address]
+           ,[Cellphone]
+           ,[TypeDriver]
+           ,[BirthDate]
+           ,[Sector]
            ,[rg])
      VALUES
            (2
@@ -252,142 +241,142 @@ INSERT INTO [motorista]
            ,'05195342828'
            ,'VAN'
            ,'19860112 18:31:09'
-           ,'FROTA'
+           ,'FRoute'
            ,8000000008
        )
 --
-INSERT INTO [rota]
-           ([idrota]
-           ,[origem]
-           ,[destino]
-           ,[kmpadrao])
+INSERT INTO [Route]
+           ([idRoute]
+           ,[source]
+           ,[destiny]
+           ,KmPattern)
      VALUES
            (1
            ,'CAXIAS DO SUL'
            ,'BENTO GONCALVES'
            ,44)
 --
-INSERT INTO [rota]
-           ([idrota]
-           ,[origem]
-           ,[destino]
-           ,[kmpadrao])
+INSERT INTO [Route]
+           ([idRoute]
+           ,[source]
+           ,[destiny]
+           ,[KmPattern])
      VALUES
            (2
            ,'CAXIAS DO SUL'
            ,'FARROUPILHA'
            ,18.7)
 --
-INSERT INTO [rota]
-           ([idrota]
-           ,[origem]
-           ,[destino]
-           ,[kmpadrao])
+INSERT INTO [Route]
+           ([idRoute]
+           ,[source]
+           ,[destiny]
+           ,[KmPattern])
      VALUES
            (3
            ,'CAXIAS DO SUL'
            ,'FLORES DA CUNHA'
            ,19.8)
 --
-INSERT INTO [manutencao]
-           ([idmanutencao]
-           ,[descricao]
-           ,[periodicidade])
+INSERT INTO [maintenance]
+           ([idmaintenance]
+           ,[description]
+           ,[frequency])
      VALUES
            (10
            ,'TROCA DE OLEO'
            ,'20220112 18:31:09')
 --
-INSERT INTO [manutencao]
-           ([idmanutencao]
-           ,[descricao]
-           ,[periodicidade])
+INSERT INTO [maintenance]
+           ([idmaintenance]
+           ,[description]
+           ,[frequency])
      VALUES
            (20
            ,'CORREIA DO PONTO'
            ,'20220305 07:00:01')
 --
-INSERT INTO [manutencao]
-           ([idmanutencao]
-           ,[descricao]
-           ,[periodicidade])
+INSERT INTO [maintenance]
+           ([idmaintenance]
+           ,[description]
+           ,[frequency])
      VALUES
            (30
            ,'PASTILHAS DE FREIO'
            ,'20211212 09:02:01')
 --
-INSERT INTO [autenticacao]
-           ([idautenticacao]
-           ,[usuario]
+INSERT INTO [Authentication]
+           ([IdAuthentication]
+           ,[User]
            ,[email]
-           ,[senha])
+           ,[Password])
      VALUES
            (100
            ,'MARIANA.PEZZI'
            ,'MARIANA.PEZZI@GMAIL.COM'
            ,'MPEZZI')
 --
-INSERT INTO [autenticacao]
-           ([idautenticacao]
-           ,[usuario]
+INSERT INTO [authentication]
+           ([idauthentication]
+           ,[user]
            ,[email]
-           ,[senha])
+           ,[password])
      VALUES
            (200
            ,'IVAN.OLIVEIRA'
            ,'IVAN.OLIVEIRA@GMAIL.COM'
            ,'IOLIVEIRA')
 --
-INSERT INTO [statusagendamento]
-           ([idstatusagendamento]
-           ,[descricao])
+INSERT INTO [statusScheduling]
+           ([idstatusScheduling]
+           ,[description])
      VALUES
            (1000
            ,'AGUARDANDO')
 --
-INSERT INTO [statusagendamento]
-           ([idstatusagendamento]
-           ,[descricao])
+INSERT INTO [statusScheduling]
+           ([idstatusScheduling]
+           ,[description])
      VALUES
            (2000
            ,'INICIADO')
 --
-INSERT INTO [statusagendamento]
-           ([idstatusagendamento]
-           ,[descricao])
+INSERT INTO [statusScheduling]
+           ([idstatusScheduling]
+           ,[description])
      VALUES
            (3000
            ,'FINALIZADO')
 --
-INSERT INTO [statusveiculo]
-           ([idstatusveiculo]
-           ,[descricao])
+INSERT INTO [statusVehicle]
+           ([idstatusVehicle]
+           ,[description])
      VALUES
            (2
            ,'INATIVO')
 --
-INSERT INTO [statusveiculo]
-           ([idstatusveiculo]
-           ,[descricao])
+INSERT INTO [statusVehicle]
+           ([idstatusVehicle]
+           ,[description])
      VALUES
            (1
            ,'ATIVO')
 --
 
-INSERT INTO [veiculo]
-           ([idveiculo]
-           ,[modelo]
+INSERT INTO [Vehicle]
+           ([idVehicle]
+           ,[model]
            ,[km]
-           ,[placa]
-           ,[tipo]
-           ,[marca]
-           ,[cor]
-           ,[ano]
+           ,[board]
+           ,[Type]
+           ,[Model]
+           ,[Color]
+           ,[Year]
            ,[renavam]
            ,[chassi]
-           --,[idmanutencao]
-           ,[idstatusveiculo]
-           ,[observacao])
+           --,[idmaintenance]
+           ,[idstatusVehicle]
+           ,[Observation])
      VALUES
            (11
            ,'UNO'
@@ -399,24 +388,24 @@ INSERT INTO [veiculo]
            ,'20211212 09:02:01'
            ,123456
            ,654321
-           --,<idmanutencao, int,>
+           --,<idmaintenance, int,>
            ,1
            ,'OBS')
 --
-INSERT INTO [veiculo]
-           ([idveiculo]
-           ,[modelo]
+INSERT INTO [Vehicle]
+           ([idVehicle]
+           ,[model]
            ,[km]
-           ,[placa]
-           ,[tipo]
-           ,[marca]
-           ,[cor]
-           ,[ano]
+           ,[board]
+           ,[Type]
+           ,[Model]
+           ,[Color]
+           ,[Year]
            ,[renavam]
            ,[chassi]
-           --,[idmanutencao]
-           ,[idstatusveiculo]
-           ,[observacao])
+           --,[idmaintenance]
+           ,[idstatusVehicle]
+           ,[Observation])
      VALUES
            (12
            ,'ONIBUS'
@@ -428,24 +417,24 @@ INSERT INTO [veiculo]
            ,'20001212 09:02:01'
            ,987456
            ,654789
-           --,<idmanutencao, int,>
+           --,<idmaintenance, int,>
            ,1
            ,'TESTE')
 --
-INSERT INTO [veiculo]
-           ([idveiculo]
-           ,[modelo]
+INSERT INTO [Vehicle]
+           ([idVehicle]
+           ,[model]
            ,[km]
-           ,[placa]
-           ,[tipo]
-           ,[marca]
-           ,[cor]
-           ,[ano]
+           ,[board]
+           ,[type]
+           ,[Brand]
+           ,[Color]
+           ,[Year]
            ,[renavam]
            ,[chassi]
-           --,[idmanutencao]
-           ,[idstatusveiculo]
-           ,[observacao])
+           --,[idmaintenance]
+           ,[idstatusVehicle]
+           ,[observation])
      VALUES
            (13
            ,'KOMBI'
@@ -457,89 +446,89 @@ INSERT INTO [veiculo]
            ,'20011212 09:02:01'
            ,147852
            ,698547
-           --,<idmanutencao, int,>
+           --,<idmaintenance, int,>
            ,2
            ,'INATIVADO')
 --
 
-INSERT INTO [veiculomanutencao]
-           ([idveiculomanutencao]
-           ,[idveiculo]
-           ,[idmanutencao]
-           ,[datamanutencao])
+INSERT INTO [Vehiclemaintenance]
+           ([idVehiclemaintenance]
+           ,[idVehicle]
+           ,[idmaintenance]
+           ,[DateMaintenance])
      VALUES
            (1
            ,11
            ,10
            ,'20201112 09:02:01')
 --
-INSERT INTO [veiculomanutencao]
-           ([idveiculomanutencao]
-           ,[idveiculo]
-           ,[idmanutencao]
-           ,[datamanutencao])
+INSERT INTO [Vehiclemaintenance]
+           ([idVehiclemaintenance]
+           ,[idVehicle]
+           ,[idmaintenance]
+           ,[DateMaintenance])
      VALUES
            (6
            ,11
            ,10
            ,'20201213 09:02:01')
 --
-INSERT INTO [veiculomanutencao]
-           ([idveiculomanutencao]
-           ,[idveiculo]
-           ,[idmanutencao]
-           ,[datamanutencao])
+INSERT INTO [Vehiclemaintenance]
+           ([idVehiclemaintenance]
+           ,[idVehicle]
+           ,[idmaintenance]
+           ,DateMaintenance)
      VALUES
            (2
            ,11
            ,20
            ,'20201112 10:15:30')
 --
-INSERT INTO [veiculomanutencao]
-           ([idveiculomanutencao]
-           ,[idveiculo]
-           ,[idmanutencao]
-           ,[datamanutencao])
+INSERT INTO [Vehiclemaintenance]
+           ([idVehiclemaintenance]
+           ,[idVehicle]
+           ,[idmaintenance]
+           ,[DateMaintenance])
      VALUES
            (3
            ,11
            ,30
            ,'20201212 11:30:00')
 --
-INSERT INTO [veiculomanutencao]
-           ([idveiculomanutencao]
-           ,[idveiculo]
-           ,[idmanutencao]
-           ,[datamanutencao])
+INSERT INTO [Vehiclemaintenance]
+           ([idVehiclemaintenance]
+           ,[idVehicle]
+           ,[idmaintenance]
+           ,DateMaintenance)
      VALUES
            (4
            ,12
            ,20
            ,'20201226 10:00:12')
 --
-INSERT INTO [veiculomanutencao]
-           ([idveiculomanutencao]
-           ,[idveiculo]
-           ,[idmanutencao]
-           ,[datamanutencao])
+INSERT INTO [Vehiclemaintenance]
+           ([idVehiclemaintenance]
+           ,[idVehicle]
+           ,[idmaintenance]
+           ,DateMaintenance)
      VALUES
            (5
            ,12
            ,30
            ,'20201215 08:20:00')
 --
-INSERT INTO [agendamento]
-           ([idagendamento]
-           ,[datainicialprevista]
-           ,[datafinalprevista]
-           ,[idrota]
-           ,[idveiculo]
-           ,[idmotorista]
-           ,[datainicialrealizada]
-           ,[datafinalrealizada]
-           ,[kmfinal]
-           ,[idstatusagendamento]
-           ,[idautenticacao])
+INSERT INTO [Scheduling]
+           ([idScheduling]
+           ,[expectedstartdate]
+           ,[expectedenddate]
+           ,[idRoute]
+           ,[idVehicle]
+           ,[idDriver]
+           ,[startdateperformed]
+           ,[enddateperformed]
+           ,[endkm]
+           ,[idstatusScheduling]
+           ,[idauthentication])
      VALUES
            (1
            ,'20201112 09:02:01'
@@ -553,18 +542,18 @@ INSERT INTO [agendamento]
            ,2000
            ,200)
 --
-INSERT INTO [agendamento]
-           ([idagendamento]
-           ,[datainicialprevista]
-           ,[datafinalprevista]
-           ,[idrota]
-           ,[idveiculo]
-           ,[idmotorista]
-           ,[datainicialrealizada]
-           ,[datafinalrealizada]
-           ,[kmfinal]
-           ,[idstatusagendamento]
-           ,[idautenticacao])
+INSERT INTO [Scheduling]
+           ([idScheduling]
+           ,[expectedstartdate]
+           ,[expectedenddate]
+           ,[idRoute]
+           ,[idVehicle]
+           ,[idDriver]
+           ,[startdateperformed]
+           ,[enddateperformed]
+           ,[endkm]
+           ,[idstatusScheduling]
+           ,[idauthentication])
      VALUES
            (2
            ,'20201113 07:20:01'
@@ -578,18 +567,18 @@ INSERT INTO [agendamento]
            ,1000
            ,200)
 --
-INSERT INTO [agendamento]
-           ([idagendamento]
-           ,[datainicialprevista]
-           ,[datafinalprevista]
-           ,[idrota]
-           ,[idveiculo]
-           ,[idmotorista]
-           ,[datainicialrealizada]
-           ,[datafinalrealizada]
-           ,[kmfinal]
-           ,[idstatusagendamento]
-           ,[idautenticacao])
+INSERT INTO [Scheduling]
+           ([idScheduling]
+           ,[expectedstartdate]
+           ,[expectedenddate]
+           ,[idRoute]
+           ,[idVehicle]
+           ,[idDriver]
+           ,[startdateperformed]
+           ,[enddateperformed]
+           ,[endkm]
+           ,[idstatusScheduling]
+           ,IdAuthentication)
      VALUES
            (3
            ,'20201115 07:20:01'
@@ -602,3 +591,6 @@ INSERT INTO [agendamento]
            ,5018.7
            ,2000
            ,100);
+
+
+
