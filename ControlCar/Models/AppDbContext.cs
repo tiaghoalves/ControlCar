@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-#nullable disable
+// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
+// If you have enabled NRTs for your project, then un-comment the following line:
+// #nullable disable
 
 namespace ControlCar.Models
 {
@@ -17,373 +19,271 @@ namespace ControlCar.Models
         {
         }
 
-        public virtual DbSet<Agendamento> Agendamentos { get; set; }
-        public virtual DbSet<Autenticacao> Autenticacaos { get; set; }
-        public virtual DbSet<Manutencao> Manutencaos { get; set; }
-        public virtual DbSet<Motoristum> Motorista { get; set; }
-        public virtual DbSet<Rotum> Rota { get; set; }
-        public virtual DbSet<StatusAgendamento> StatusAgendamentos { get; set; }
-        public virtual DbSet<StatusVeiculo> StatusVeiculos { get; set; }
-        public virtual DbSet<Veiculo> Veiculos { get; set; }
-        public virtual DbSet<VeiculoManutencao> VeiculoManutencaos { get; set; }
+        public virtual DbSet<Authentication> Authentication { get; set; }
+        public virtual DbSet<Driver> Driver { get; set; }
+        public virtual DbSet<Maintenance> Maintenance { get; set; }
+        public virtual DbSet<Route> Route { get; set; }
+        public virtual DbSet<Scheduling> Scheduling { get; set; }
+        public virtual DbSet<StatusScheduling> StatusScheduling { get; set; }
+        public virtual DbSet<StatusVehicle> StatusVehicle { get; set; }
+        public virtual DbSet<Vehicle> Vehicle { get; set; }
+        public virtual DbSet<VehicleMaintenance> VehicleMaintenance { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-HSB3HRH\\SQLEXPRESS;Initial Catalog=ControlCar;Integrated Security=True;Pooling=False");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=ControlCar;Integrated Security=True;Pooling=False");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
-
-            modelBuilder.Entity<Agendamento>(entity =>
+            modelBuilder.Entity<Authentication>(entity =>
             {
-                entity.HasKey(e => e.IdAgendamento)
-                    .HasName("pk_agendamento")
+                entity.HasKey(e => e.IdAuthentication)
+                    .HasName("pk_autentication")
                     .IsClustered(false);
 
-                entity.ToTable("Agendamento");
-
-                entity.Property(e => e.IdAgendamento)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador do Agendamento (PK)");
-
-                entity.Property(e => e.DataFinalPrevista)
-                    .HasColumnType("datetime")
-                    .HasComment("Data Final Prevista do Agendamento");
-
-                entity.Property(e => e.DataFinalRealizada)
-                    .HasColumnType("datetime")
-                    .HasComment("Data Final do Agendamento Realizado");
-
-                entity.Property(e => e.DataInicialPrevista)
-                    .HasColumnType("datetime")
-                    .HasComment("Data Inicial Prevista do Agendamento");
-
-                entity.Property(e => e.DataInicialRealizada)
-                    .HasColumnType("datetime")
-                    .HasComment("Data Inicial do Agendamento Realizado");
-
-                entity.Property(e => e.IdAutenticacao).HasComment("Identificação da autenticação (FK AUTENTICACAO)");
-
-                entity.Property(e => e.IdMotorista).HasComment("Identificação do motorista (FK MOTORISTAS)");
-
-                entity.Property(e => e.IdRota).HasComment("Identificação da rota (FK ROTAS)");
-
-                entity.Property(e => e.IdStatusAgendamento).HasComment("Identificação de status, finalizada em (FK STATUSAGENDAMENTO)");
-
-                entity.Property(e => e.IdVeiculo).HasComment("Identificação do veículo (FK VEICULOS)");
-
-                entity.Property(e => e.KmFinal).HasComment("Quilometragem percorrida");
-
-                entity.HasOne(d => d.IdAutenticacaoNavigation)
-                    .WithMany(p => p.Agendamentos)
-                    .HasForeignKey(d => d.IdAutenticacao)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("fk_agendamento_autenticacao");
-
-                entity.HasOne(d => d.IdMotoristaNavigation)
-                    .WithMany(p => p.Agendamentos)
-                    .HasForeignKey(d => d.IdMotorista)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("fk_agendamento_motorista");
-
-                entity.HasOne(d => d.IdRotaNavigation)
-                    .WithMany(p => p.Agendamentos)
-                    .HasForeignKey(d => d.IdRota)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("fk_agendamento_rota");
-
-                entity.HasOne(d => d.IdStatusAgendamentoNavigation)
-                    .WithMany(p => p.Agendamentos)
-                    .HasForeignKey(d => d.IdStatusAgendamento)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("fk_agendamento_status_agendamento");
-
-                entity.HasOne(d => d.IdVeiculoNavigation)
-                    .WithMany(p => p.Agendamentos)
-                    .HasForeignKey(d => d.IdVeiculo)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("fk_agendamento_veiculo");
-            });
-
-            modelBuilder.Entity<Autenticacao>(entity =>
-            {
-                entity.HasKey(e => e.IdAutenticacao)
-                    .HasName("pk_autenticacao")
-                    .IsClustered(false);
-
-                entity.ToTable("Autenticacao");
-
-                entity.Property(e => e.IdAutenticacao)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador da  autenticação (PK)");
+                entity.Property(e => e.IdAuthentication).ValueGeneratedNever();
 
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasComment("Endereço de e-mail do usuário administrador");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Senha)
+                entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasComment("Senha do usuário administrador");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Usuario)
+                entity.Property(e => e.User)
                     .IsRequired()
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasComment("Nome do usuário Administrador");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Manutencao>(entity =>
+            modelBuilder.Entity<Driver>(entity =>
             {
-                entity.HasKey(e => e.IdManutencao)
-                    .HasName("pk_manutencao")
+                entity.HasKey(e => e.IdDriver)
+                    .HasName("pk_Driver")
                     .IsClustered(false);
 
-                entity.ToTable("Manutencao");
+                entity.Property(e => e.IdDriver).ValueGeneratedNever();
 
-                entity.Property(e => e.IdManutencao)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador de manutenção (PK)");
+                entity.Property(e => e.Address)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Descricao)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasComment("Descrição da manutenção");
+                entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Periodicidade)
-                    .HasColumnType("datetime")
-                    .HasComment("Intervalo de tempo para cada manutenção");
-            });
-
-            modelBuilder.Entity<Motoristum>(entity =>
-            {
-                entity.HasKey(e => e.IdMotorista)
-                    .HasName("pk_motorista")
-                    .IsClustered(false);
-
-                entity.Property(e => e.IdMotorista)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador do motorista (PK)");
-
-                entity.Property(e => e.Cargo)
-                    .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasComment("Cargo do motorista cadastrado");
-
-                entity.Property(e => e.Celular)
+                entity.Property(e => e.Cellphone)
                     .HasMaxLength(11)
-                    .IsUnicode(false)
-                    .HasComment("Número de celular do motorista");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Cpf)
                     .IsRequired()
                     .HasMaxLength(11)
-                    .IsUnicode(false)
-                    .HasComment("Cpf do motorista cadastrado");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.DataNascimento)
-                    .HasColumnType("datetime")
-                    .HasComment("Data de nascimento do motorista");
+                entity.Property(e => e.ExpirationDateCnh).HasColumnType("datetime");
 
-                entity.Property(e => e.DataVencimentoCnh)
-                    .HasColumnType("datetime")
-                    .HasComment("Data de vencimento da cnh do motorista");
-
-                entity.Property(e => e.Endereco)
-                    .HasMaxLength(30)
-                    .IsUnicode(false)
-                    .HasComment("Endereço do motorista");
-
-                entity.Property(e => e.Nome)
+                entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasComment("Nome do motorista cadastrado");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Rg)
-                    .HasColumnType("numeric(10, 0)")
-                    .HasComment("Número do rg do motorista");
-
-                entity.Property(e => e.Setor)
+                entity.Property(e => e.Office)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasComment("Setor em que o motorista trabalha");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TipoMotorista)
+                entity.Property(e => e.Rg).HasColumnType("numeric(10, 0)");
+
+                entity.Property(e => e.Sector)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasComment("Tipo de motorista, caro, van");
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TypeDriver)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Rotum>(entity =>
+            modelBuilder.Entity<Maintenance>(entity =>
             {
-                entity.HasKey(e => e.IdRota)
-                    .HasName("pk_rota")
+                entity.HasKey(e => e.IdMaintenance)
+                    .HasName("pk_maintenance")
                     .IsClustered(false);
 
-                entity.Property(e => e.IdRota)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador da rota (PK)");
+                entity.Property(e => e.IdMaintenance).ValueGeneratedNever();
 
-                entity.Property(e => e.Destino)
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Frequency).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<Route>(entity =>
+            {
+                entity.HasKey(e => e.IdRoute)
+                    .HasName("pk_Route")
+                    .IsClustered(false);
+
+                entity.Property(e => e.IdRoute).ValueGeneratedNever();
+
+                entity.Property(e => e.Destiny)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("Cidade de destino da rota");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.KmPadrao).HasComment("Distância padrão para a rota");
-
-                entity.Property(e => e.Origem)
+                entity.Property(e => e.Source)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("Cidade de origem da rota");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<StatusAgendamento>(entity =>
+            modelBuilder.Entity<Scheduling>(entity =>
             {
-                entity.HasKey(e => e.IdstatusAgendamento)
-                    .HasName("pk_status_agendamento")
+                entity.HasKey(e => e.IdScheduling)
+                    .HasName("pk_Scheduling")
                     .IsClustered(false);
 
-                entity.ToTable("StatusAgendamento");
+                entity.Property(e => e.IdScheduling).ValueGeneratedNever();
 
-                entity.Property(e => e.IdstatusAgendamento)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador de status de agendamento (PK)");
+                entity.Property(e => e.EndDatePerformed).HasColumnType("datetime");
 
-                entity.Property(e => e.Descricao)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasComment("Status do agendamento");
+                entity.Property(e => e.ExpectedEndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ExpectedStartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.StartDatePerformed).HasColumnType("datetime");
+
+                entity.HasOne(d => d.IdDriverNavigation)
+                    .WithMany(p => p.Scheduling)
+                    .HasForeignKey(d => d.IdDriver)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("fk_Scheduling_Driver");
+
+                entity.HasOne(d => d.IdRouteNavigation)
+                    .WithMany(p => p.Scheduling)
+                    .HasForeignKey(d => d.IdRoute)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("fk_Scheduling_Route");
+
+                entity.HasOne(d => d.IdSchedulingNavigation)
+                    .WithOne(p => p.Scheduling)
+                    .HasForeignKey<Scheduling>(d => d.IdScheduling)
+                    .HasConstraintName("fk_Scheduling_authentication");
+
+                entity.HasOne(d => d.IdStatusSchedulingNavigation)
+                    .WithMany(p => p.Scheduling)
+                    .HasForeignKey(d => d.IdStatusScheduling)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("fk_Scheduling_status_Scheduling");
+
+                entity.HasOne(d => d.IdVehicleNavigation)
+                    .WithMany(p => p.Scheduling)
+                    .HasForeignKey(d => d.IdVehicle)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("fk_Scheduling_Vehicle");
             });
 
-            modelBuilder.Entity<StatusVeiculo>(entity =>
+            modelBuilder.Entity<StatusScheduling>(entity =>
             {
-                entity.HasKey(e => e.IdstatusVeiculo)
-                    .HasName("pk_status_veiculo")
+                entity.HasKey(e => e.IdstatusScheduling)
+                    .HasName("pk_status_Scheduling")
                     .IsClustered(false);
 
-                entity.ToTable("StatusVeiculo");
+                entity.Property(e => e.IdstatusScheduling).ValueGeneratedNever();
 
-                entity.Property(e => e.IdstatusVeiculo)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador de status do veículo (PK)");
-
-                entity.Property(e => e.Descricao)
+                entity.Property(e => e.Description)
                     .IsRequired()
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasComment("Status de veículo");
+                    .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Veiculo>(entity =>
+            modelBuilder.Entity<StatusVehicle>(entity =>
             {
-                entity.HasKey(e => e.IdVeiculo)
-                    .HasName("pk_veiculo")
+                entity.HasKey(e => e.IdstatusVehicle)
+                    .HasName("pk_status_vehicle")
                     .IsClustered(false);
 
-                entity.ToTable("Veiculo");
+                entity.Property(e => e.IdstatusVehicle).ValueGeneratedNever();
 
-                entity.Property(e => e.IdVeiculo)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador do veículo (PK)");
-
-                entity.Property(e => e.Ano)
-                    .HasColumnType("datetime")
-                    .HasComment("Ano de fabricação do veículo");
-
-                entity.Property(e => e.Chassi)
-                    .HasColumnType("numeric(18, 0)")
-                    .HasComment("Número da marcação do chassi");
-
-                entity.Property(e => e.Cor)
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasComment("Descrição da cor do veículo");
-
-                entity.Property(e => e.IdStatusVeiculo).HasComment("Identificação de status do veículo (FK STATUSVEICULO)");
-
-                entity.Property(e => e.Km).HasComment("Quilometragem atual do veículo");
-
-                entity.Property(e => e.Marca)
-                    .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasComment("Descrição do modelo do veículo");
-
-                entity.Property(e => e.Modelo)
-                    .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasComment("Modelo do veiculo");
-
-                entity.Property(e => e.Observacao)
+                entity.Property(e => e.Description)
                     .IsRequired()
-                    .HasMaxLength(300)
-                    .IsUnicode(false)
-                    .HasComment("Observação do veículo");
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
 
-                entity.Property(e => e.Placa)
+            modelBuilder.Entity<Vehicle>(entity =>
+            {
+                entity.HasKey(e => e.IdVehicle)
+                    .HasName("pk_Vehicle")
+                    .IsClustered(false);
+
+                entity.Property(e => e.IdVehicle).ValueGeneratedNever();
+
+                entity.Property(e => e.Board)
                     .IsRequired()
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasComment("Identificação da placa do veículo");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Renavam)
-                    .HasColumnType("numeric(18, 0)")
-                    .HasComment("Número do documento do veículo");
-
-                entity.Property(e => e.Tipo)
+                entity.Property(e => e.Brand)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasComment("Identificação do tipo do veículo");
+                    .IsUnicode(false);
 
-                entity.HasOne(d => d.IdStatusVeiculoNavigation)
-                    .WithMany(p => p.Veiculos)
-                    .HasForeignKey(d => d.IdStatusVeiculo)
+                entity.Property(e => e.Chassi).HasColumnType("numeric(18, 0)");
+
+                entity.Property(e => e.Color)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Model)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Observation)
+                    .IsRequired()
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Renavam).HasColumnType("numeric(18, 0)");
+
+                entity.Property(e => e.Type)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Year).HasColumnType("datetime");
+
+                entity.HasOne(d => d.IdStatusVehicleNavigation)
+                    .WithMany(p => p.Vehicle)
+                    .HasForeignKey(d => d.IdStatusVehicle)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("fk_veiculo_statusveiculo");
+                    .HasConstraintName("fk_Vehicle_statusVehicle");
             });
 
-            modelBuilder.Entity<VeiculoManutencao>(entity =>
+            modelBuilder.Entity<VehicleMaintenance>(entity =>
             {
-                entity.HasKey(e => e.IdVeiculoManutencao)
+                entity.HasKey(e => e.IdVehicleMaintenance)
                     .HasName("pk_veicmanu")
                     .IsClustered(false);
 
-                entity.ToTable("VeiculoManutencao");
+                entity.Property(e => e.IdVehicleMaintenance).ValueGeneratedNever();
 
-                entity.Property(e => e.IdVeiculoManutencao)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador do veiculo manutencao (PK)");
+                entity.Property(e => e.DateMaintenance).HasColumnType("datetime");
 
-                entity.Property(e => e.DataManutencao)
-                    .HasColumnType("datetime")
-                    .HasComment("Data da manutenção");
-
-                entity.Property(e => e.IdManutencao).HasComment("Identificador de manutenção (FK MANUTENCAO)");
-
-                entity.Property(e => e.IdVeiculo).HasComment("Identificador do veículo (FK VEICULO)");
-
-                entity.HasOne(d => d.IdManutencaoNavigation)
-                    .WithMany(p => p.VeiculoManutencaos)
-                    .HasForeignKey(d => d.IdManutencao)
+                entity.HasOne(d => d.IdMaintenanceNavigation)
+                    .WithMany(p => p.VehicleMaintenance)
+                    .HasForeignKey(d => d.IdMaintenance)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_veicmanu_manutencao");
+                    .HasConstraintName("fk_veicmanu_maintenance");
 
-                entity.HasOne(d => d.IdVeiculoNavigation)
-                    .WithMany(p => p.VeiculoManutencaos)
-                    .HasForeignKey(d => d.IdVeiculo)
+                entity.HasOne(d => d.IdVehicleNavigation)
+                    .WithMany(p => p.VehicleMaintenance)
+                    .HasForeignKey(d => d.IdVehicle)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_veicmanu_veiculo");
+                    .HasConstraintName("fk_veicmanu_Vehicle");
             });
 
             OnModelCreatingPartial(modelBuilder);
