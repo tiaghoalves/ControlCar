@@ -53,7 +53,7 @@ namespace ControlCar.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDriver,Name,Cpf,ExpirationDateCnh,Office,Address,Cellphone,TypeDriver,BirthDate,Sector,Rg")] Driver driver)
+        public async Task<IActionResult> Create([Bind("Name,Cpf,ExpirationDateCnh,Office,Address,Cellphone,TypeDriver,BirthDate,Sector,Rg")] Driver driver)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +61,7 @@ namespace ControlCar.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(driver);
         }
 

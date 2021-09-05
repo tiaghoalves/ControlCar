@@ -46,7 +46,7 @@ namespace ControlCar.Models
                     .HasName("pk_autentication")
                     .IsClustered(false);
 
-                entity.Property(e => e.IdAuthentication).ValueGeneratedNever();
+                entity.Property(e => e.IdAuthentication).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -70,7 +70,7 @@ namespace ControlCar.Models
                     .HasName("pk_Driver")
                     .IsClustered(false);
 
-                entity.Property(e => e.IdDriver).ValueGeneratedNever();
+                entity.Property(e => e.IdDriver).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(30)
@@ -115,7 +115,7 @@ namespace ControlCar.Models
                     .HasName("pk_maintenance")
                     .IsClustered(false);
 
-                entity.Property(e => e.IdMaintenance).ValueGeneratedNever();
+                entity.Property(e => e.IdMaintenance).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -131,7 +131,7 @@ namespace ControlCar.Models
                     .HasName("pk_Route")
                     .IsClustered(false);
 
-                entity.Property(e => e.IdRoute).ValueGeneratedNever();
+                entity.Property(e => e.IdRoute).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Destiny)
                     .HasMaxLength(50)
@@ -148,7 +148,7 @@ namespace ControlCar.Models
                     .HasName("pk_Scheduling")
                     .IsClustered(false);
 
-                entity.Property(e => e.IdScheduling).ValueGeneratedNever();
+                entity.Property(e => e.IdScheduling).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.EndDatePerformed).HasColumnType("datetime");
 
@@ -194,7 +194,7 @@ namespace ControlCar.Models
                     .HasName("pk_status_Scheduling")
                     .IsClustered(false);
 
-                entity.Property(e => e.IdstatusScheduling).ValueGeneratedNever();
+                entity.Property(e => e.IdstatusScheduling).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -208,7 +208,7 @@ namespace ControlCar.Models
                     .HasName("pk_status_vehicle")
                     .IsClustered(false);
 
-                entity.Property(e => e.IdstatusVehicle).ValueGeneratedNever();
+                entity.Property(e => e.IdstatusVehicle).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -222,7 +222,7 @@ namespace ControlCar.Models
                     .HasName("pk_Vehicle")
                     .IsClustered(false);
 
-                entity.Property(e => e.IdVehicle).ValueGeneratedNever();
+                entity.Property(e => e.IdVehicle).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Board)
                     .IsRequired()
@@ -269,7 +269,7 @@ namespace ControlCar.Models
                     .HasName("pk_veicmanu")
                     .IsClustered(false);
 
-                entity.Property(e => e.IdVehicleMaintenance).ValueGeneratedNever();
+                entity.Property(e => e.IdVehicleMaintenance).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.DateMaintenance).HasColumnType("datetime");
 

@@ -1,14 +1,14 @@
 ﻿@model ControlCar.Models.Driver
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Motorista - Detalhes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Detalhes</h1>
 
 <div>
-    <h4>Driver</h4>
+    <h4>Motorista</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -74,6 +74,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.IdDriver">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.IdDriver">Editar</a> |
+    <a asp-action="Index">Voltar para listagem</a>
 </div>

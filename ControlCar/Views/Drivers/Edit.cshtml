@@ -1,13 +1,13 @@
 ﻿@model ControlCar.Models.Driver
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Motorista - Edição";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
-<h4>Driver</h4>
+<h4>Motorista</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Cpf" class="control-label"></label>
-                <input asp-for="Cpf" class="form-control" />
+                <input asp-for="Cpf" class="form-control" onkeypress="$(this).mask('000.000.000-00');" />
                 <span asp-validation-for="Cpf" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -41,7 +41,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Cellphone" class="control-label"></label>
-                <input asp-for="Cellphone" class="form-control" />
+                <input asp-for="Cellphone" class="form-control" onkeypress="$(this).mask('(00) 0000-00009')" />
                 <span asp-validation-for="Cellphone" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -65,14 +65,14 @@
                 <span asp-validation-for="Rg" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar para listagem</a>
 </div>
 
 @section Scripts {

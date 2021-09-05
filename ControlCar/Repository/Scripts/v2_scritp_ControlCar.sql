@@ -1,7 +1,7 @@
 use ControlCar;
 
 drop table Scheduling;
-drop table MaintenanceVehicle;
+drop table VehicleMaintenance;
 drop table Vehicle;
 drop table StatusVehicle;
 drop table StatusScheduling;
@@ -14,7 +14,7 @@ drop table Driver;
 -- Driver
 --
 create table Driver(
-   IdDriver                int           not null -- Driver identifier
+   IdDriver                int IDENTITY(1,1) not null -- Driver identifier
   ,Name                        varchar(25)   not null -- Registered Driver Name
   ,Cpf                         varchar(11)   not null -- CPF of the registered Driver
   ,ExpirationDateCnh         datetime      not null -- expiration date of CNH Driver
@@ -33,7 +33,7 @@ create table Driver(
 -- Route
 --
 create table Route(
-   IdRoute                          int           not null -- Route Identifier
+   IdRoute                          int   IDENTITY(1,1)        not null -- Route Identifier
   ,Source                           varchar(50)       null -- Route's city of origin
   ,Destiny                          varchar(50)       null -- Route destination city
   ,KmPattern                        float             null -- Default Distance to Route
@@ -44,7 +44,7 @@ create table Route(
 -- MAINTENANCE
 --
 create table Maintenance(
-   IdMaintenance       int          not null -- Maintenance identifier
+   IdMaintenance       int    IDENTITY(1,1)      not null -- Maintenance identifier
   ,[Description]           varchar(100) not null -- Maintenance Description
   ,Frequency       datetime      not null -- Time interval for each Maintenance
   ,constraint pk_maintenance primary key nonclustered (idmaintenance)
@@ -57,7 +57,7 @@ create table Maintenance(
 -- AUTHENTICATION
 --
 create table Authentication(
-   IdAuthentication      int           not null -- Authentication identifier
+   IdAuthentication      int    IDENTITY(1,1)       not null -- Authentication identifier
   ,[User]                 varchar(100)  not null -- Admin User Name
   ,Email                varchar(100)  not null -- Admin user email address
   ,[Password]                varchar(100)  not null -- Admin user password
@@ -71,7 +71,7 @@ create table Authentication(
 -- STATUS Scheduling
 --
 create table StatusScheduling(
-   IdstatusScheduling        int          not null  -- Scheduling status identifier
+   IdstatusScheduling        int   IDENTITY(1,1)       not null  -- Scheduling status identifier
   ,Description                    varchar(100) not null  -- Scheduling Status
   ,constraint pk_status_Scheduling primary key nonclustered (idstatusscheduling)
 );
@@ -81,7 +81,7 @@ create table StatusScheduling(
 -- STATUS VEÍCULO
 --
 create table StatusVehicle(
-   IdstatusVehicle    int          not null  -- Vehicle Status Identifier
+   IdstatusVehicle    int    IDENTITY(1,1)      not null  -- Vehicle Status Identifier
   ,Description            varchar(100) not null  -- Vehicle status
   ,constraint pk_status_vehicle primary key nonclustered (idstatusvehicle)
 );
@@ -91,7 +91,7 @@ create table StatusVehicle(
 -- Vehicles
 --
 create table Vehicle(
-   IdVehicle            int           not null -- Vehicle identifier
+   IdVehicle            int  IDENTITY(1,1)         not null -- Vehicle identifier
   ,Model                varchar(10)       null -- Vehicle Model
   ,Km                    float         not null -- Current vehicle mileage
   ,Board                 varchar(20)   not null -- Vehicle license board identification
@@ -126,7 +126,7 @@ create table Vehicle(
 -- VEHICLE MAINTENANCE
 --
 create table VehicleMaintenance(
-   IdVehicleMaintenance    int          not null   -- Maintenance Vehicle Identifier
+   IdVehicleMaintenance    int    IDENTITY(1,1)      not null   -- Maintenance Vehicle Identifier
   ,IdVehicle               int          not null   -- Vehicle identifier
   ,IdMaintenance           int           not null   -- Maintenance identifier
   ,DateMaintenance          datetime   not null   -- Date Maintenance 
@@ -148,7 +148,7 @@ create table VehicleMaintenance(
 -- SchedulingS
 --
 create table Scheduling(
-   IdScheduling             int        not null -- Scheduling identifier
+   IdScheduling             int   IDENTITY(1,1)     not null -- Scheduling identifier
   ,ExpectedStartDate      datetime   not null -- Scheduled Scheduling Start Date
   ,ExpectedEndDate        datetime   not null -- Scheduled Scheduling End Date
   ,IdRoute                    int            null -- Route identification
@@ -192,10 +192,9 @@ create table Scheduling(
 --exec sys.sp_addextendedproperty "ms_description", "Mileage covered identification", "user", "dbo", "table", scheduling, "column", "endkm"
 --exec sys.sp_addextendedproperty "ms_description", "Status identification, ending in (FK STATUSSCHEDULING)", "user", "dbo", "table", scheduling, "column", "idstatusscheduling" 
 --exec sys.sp_addextendedproperty "ms_description", "Authentication identification (FK AUTHENTICATION)", "user", "dbo", "table", scheduling, "column", "idauthentication"
-                                                 
+                                               
 INSERT INTO [Driver]
-           ([idDriver]
-           ,[Name]
+           ([Name]
            ,[cpf]
            ,[ExpirationDatecnh]
            ,[Office]
@@ -206,8 +205,7 @@ INSERT INTO [Driver]
            ,[Sector]
            ,[rg])
      VALUES
-           (1
-           ,'MARIANA'
+           ('MARIANA'
            ,'00000000001'
            ,'20220618 10:34:09'
            ,'SUPERVISOR'
@@ -220,8 +218,7 @@ INSERT INTO [Driver]
        )
 --
 INSERT INTO [Driver]
-           ([idDriver]
-           ,[Name]
+           ([Name]
            ,[cpf]
            ,[ExpirationDatecnh]
            ,[Office]
@@ -232,8 +229,7 @@ INSERT INTO [Driver]
            ,[Sector]
            ,[rg])
      VALUES
-           (2
-           ,'IVAN'
+           ('IVAN'
            ,'00000000002'
            ,'20250211 07:02:09'
            ,'CONDUTOR'
@@ -246,13 +242,11 @@ INSERT INTO [Driver]
        )
 --
 INSERT INTO [Route]
-           ([idRoute]
-           ,[source]
+           ([source]
            ,[destiny]
            ,KmPattern)
      VALUES
-           (1
-           ,'CAXIAS DO SUL'
+           ('CAXIAS DO SUL'
            ,'BENTO GONCALVES'
            ,44)
 --
@@ -262,63 +256,51 @@ INSERT INTO [Route]
            ,[destiny]
            ,[KmPattern])
      VALUES
-           (2
-           ,'CAXIAS DO SUL'
+           ('CAXIAS DO SUL'
            ,'FARROUPILHA'
            ,18.7)
 --
 INSERT INTO [Route]
-           ([idRoute]
-           ,[source]
+           ([source]
            ,[destiny]
            ,[KmPattern])
      VALUES
-           (3
-           ,'CAXIAS DO SUL'
+           ('CAXIAS DO SUL'
            ,'FLORES DA CUNHA'
            ,19.8)
 --
 INSERT INTO [maintenance]
-           ([idmaintenance]
-           ,[description]
+           ([description]
            ,[frequency])
      VALUES
-           (10
-           ,'TROCA DE OLEO'
+           ('TROCA DE OLEO'
            ,'20220112 18:31:09')
 --
 INSERT INTO [maintenance]
-           ([idmaintenance]
-           ,[description]
+           ([description]
            ,[frequency])
      VALUES
-           (20
-           ,'CORREIA DO PONTO'
+           ('CORREIA DO PONTO'
            ,'20220305 07:00:01')
 --
 INSERT INTO [maintenance]
-           ([idmaintenance]
-           ,[description]
+           ([description]
            ,[frequency])
      VALUES
-           (30
-           ,'PASTILHAS DE FREIO'
+           ('PASTILHAS DE FREIO'
            ,'20211212 09:02:01')
 --
 INSERT INTO [Authentication]
-           ([IdAuthentication]
-           ,[User]
+           ([User]
            ,[email]
            ,[Password])
      VALUES
-           (100
-           ,'MARIANA.PEZZI'
+           ('MARIANA.PEZZI'
            ,'MARIANA.PEZZI@GMAIL.COM'
            ,'MPEZZI')
 --
 INSERT INTO [authentication]
-           ([idauthentication]
-           ,[user]
+           ([user]
            ,[email]
            ,[password])
      VALUES
@@ -423,7 +405,7 @@ INSERT INTO [Vehicle]
 --
 INSERT INTO [Vehicle]
            ([idVehicle]
-           ,[model]
+           ,[Model]
            ,[km]
            ,[board]
            ,[type]
