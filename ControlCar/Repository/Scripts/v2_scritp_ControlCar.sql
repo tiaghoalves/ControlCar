@@ -16,15 +16,15 @@ drop table Driver;
 create table Driver(
    IdDriver                int IDENTITY(1,1) not null -- Driver identifier
   ,Name                        varchar(25)   not null -- Registered Driver Name
-  ,Cpf                         varchar(11)   not null -- CPF of the registered Driver
+  ,Cpf                         varchar(38)   not null -- CPF of the registered Driver
   ,ExpirationDateCnh         datetime      not null -- expiration date of CNH Driver
-  ,Office                       varchar(10)       null -- Registered Driver's Office
-  ,Address                    varchar(30)       null -- Driver Address
-  ,Cellphone                     varchar(11)       null -- Driver Cellphone Number
-  ,TypeDriver              varchar(10)       null -- Driver type, car, van
+  ,Office                       varchar(38)       null -- Registered Driver's Office
+  ,Address                    varchar(50)       null -- Driver Address
+  ,Cellphone                     varchar(38)       null -- Driver Cellphone Number
+  ,TypeDriver              varchar(38)       null -- Driver type, car, van
   ,BirthDate             datetime          null -- Driver's date of birth
-  ,Sector                       varchar(10)       null -- Sector in which the Driver works
-  ,Rg                          numeric(10)   not null -- Driver RG number
+  ,Sector                       varchar(38)       null -- Sector in which the Driver works
+  ,Rg                          numeric(38)   not null -- Driver RG number
   ,constraint pk_Driver primary key nonclustered (idDriver)
 );
 
@@ -154,7 +154,7 @@ create table Scheduling(
     references StatusScheduling (idstatusScheduling)
     on delete cascade
     on update cascade
-  , constraint fk_Scheduling_authentication foreign key (idScheduling)
+  , constraint fk_Scheduling_authentication foreign key (IdAuthentication)
     references Authentication (idAuthentication)
     on delete cascade
     on update cascade
@@ -468,8 +468,7 @@ INSERT INTO [Vehiclemaintenance]
            ,'20201215 08:20:00')
 --
 INSERT INTO [Scheduling]
-           ([idScheduling]
-           ,[expectedstartdate]
+           ([expectedstartdate]
            ,[expectedenddate]
            ,[idRoute]
            ,[idVehicle]
@@ -480,8 +479,7 @@ INSERT INTO [Scheduling]
            ,[idstatusScheduling]
            ,[idauthentication])
      VALUES
-           (1
-           ,'20201112 09:02:01'
+           ('20201112 09:02:01'
            ,'20201113 09:02:01'
            ,1
            ,11
@@ -493,8 +491,7 @@ INSERT INTO [Scheduling]
            ,200)
 --
 INSERT INTO [Scheduling]
-           ([idScheduling]
-           ,[expectedstartdate]
+           ([expectedstartdate]
            ,[expectedenddate]
            ,[idRoute]
            ,[idVehicle]
@@ -505,8 +502,7 @@ INSERT INTO [Scheduling]
            ,[idstatusScheduling]
            ,[idauthentication])
      VALUES
-           (2
-           ,'20201113 07:20:01'
+           ('20201113 07:20:01'
            ,'20201114 12:20:01'
            ,1
            ,11
@@ -518,8 +514,7 @@ INSERT INTO [Scheduling]
            ,200)
 --
 INSERT INTO [Scheduling]
-           ([idScheduling]
-           ,[expectedstartdate]
+           ([expectedstartdate]
            ,[expectedenddate]
            ,[idRoute]
            ,[idVehicle]
@@ -530,8 +525,7 @@ INSERT INTO [Scheduling]
            ,[idstatusScheduling]
            ,IdAuthentication)
      VALUES
-           (3
-           ,'20201115 07:20:01'
+           ('20201115 07:20:01'
            ,'20201116 12:20:01'
            ,2
            ,12
