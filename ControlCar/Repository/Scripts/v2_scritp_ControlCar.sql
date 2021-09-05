@@ -49,9 +49,7 @@ create table Maintenance(
   ,Frequency       datetime      not null -- Time interval for each Maintenance
   ,constraint pk_maintenance primary key nonclustered (idmaintenance)
 );
--- exec sys.sp_addextendedproperty "ms_description", "Maintenance identifier (PK)", "user", "dbo", "table", "maintenance", "column","idMaintenance"
--- exec sys.sp_addextendedproperty "ms_description", "Maintenance Description", "user", "dbo", "table", "maintenance", "column","description"    
--- exec sys.sp_addextendedproperty "ms_description", "Time interval for each maintenance", "user", "dbo", "table", "maintenance", "column","frequency"
+
 
 --
 -- AUTHENTICATION
@@ -63,10 +61,7 @@ create table Authentication(
   ,[Password]                varchar(100)  not null -- Admin user password
   ,constraint pk_autentication primary key nonclustered (IdAuthentication)
 );
--- exec sys.sp_addextendedproperty "ms_description", "Authentication identifier (PK)", "user", "dbo", "table", "authentication", "column","idAuthentication"
--- exec sys.sp_addextendedproperty "ms_description", "Admin User Name", "user", "dbo", "table", "authentication", "column","user"    
--- exec sys.sp_addextendedproperty "ms_description", "Admin user email address", "user", "dbo", "table", "authentication", "column","email"
--- exec sys.sp_addextendedproperty "ms_description", "Admin user password", "user", "dbo", "table", "authentication", "column","password"
+
 --
 -- STATUS Scheduling
 --
@@ -75,8 +70,7 @@ create table StatusScheduling(
   ,Description                    varchar(100) not null  -- Scheduling Status
   ,constraint pk_status_Scheduling primary key nonclustered (idstatusscheduling)
 );
---exec sys.sp_addextendedproperty "ms_description", "Scheduling status identifier (PK)", "user", "dbo", "table", "statusScheduling", "column","idStatusScheduling"
---exec sys.sp_addextendedproperty "ms_description", "Scheduling Status", "user", "dbo", "table", "statusScheduling", "column","description"
+
 --
 -- STATUS VEÍCULO
 --
@@ -85,8 +79,7 @@ create table StatusVehicle(
   ,Description            varchar(100) not null  -- Vehicle status
   ,constraint pk_status_vehicle primary key nonclustered (idstatusvehicle)
 );
--- exec sys.sp_addextendedproperty "ms_description", "Vehicle Status Identifier (PK)", "user", "dbo", "table", "statusvehicle", "column","idStatusVehicle"
--- exec sys.sp_addextendedproperty "ms_description", "Vehicle status", "user", "dbo", "table", "statusvehicle", "column","description"
+
 --
 -- Vehicles
 --
@@ -109,19 +102,7 @@ create table Vehicle(
     on delete cascade
     on update cascade
 );
---exec sys.sp_addextendedproperty "ms_description", "Vehicle identifier (PK)", "user", "dbo", "table", "vehicle", "column", "idVehicle"        
---exec sys.sp_addextendedproperty "ms_description", "Vehicle Model", "user", "dbo", "table", "vehicle", "column","model"           
---exec sys.sp_addextendedproperty "ms_description", "Current vehicle mileage", "user", "dbo", "table", "vehicle", "column","km"               
---exec sys.sp_addextendedproperty "ms_description", "Vehicle license board identification", "user", "dbo", "table", "vehicle", "column","board"
---exec sys.sp_addextendedproperty "ms_description", "Vehicle Type Identification", "user", "dbo", "table", "vehicle", "column","type"             
---exec sys.sp_addextendedproperty "ms_description", "Vehicle model description", "user", "dbo", "table", "vehicle", "column","brand"            
---exec sys.sp_addextendedproperty "ms_description", "Vehicle color description", "user", "dbo", "table", "vehicle", "column","color"              
---exec sys.sp_addextendedproperty "ms_description", "Year of manufacture of the vehicle", "user", "dbo", "table", "vehicle", "column","year"
---exec sys.sp_addextendedproperty "ms_description", "Vehicle document number", "user", "dbo", "table", "vehicle", "column","renavam"          
---exec sys.sp_addextendedproperty "ms_description", "Chassi Marking Number", "user", "dbo", "table", "vehicle", "column","chassi"           
---exec sys.sp_addextendedproperty "ms_description", "Vehicle Status Identification (FK MAINTENANCE)", "user", "dbo", "table", "vehicle", "column","id_maintenance"    
--- exec sys.sp_addextendedproperty "ms_description", "Vehicle Status Identification (FK STATUSVehicle)", "user", "dbo", "table", "vehicle", "column","idstatusVehicle"
--- exec sys.sp_addextendedproperty "ms_description", "Vehicle observation", "user", "dbo", "table", "Vehicle", "column","observation"
+
 --
 -- VEHICLE MAINTENANCE
 --
@@ -140,10 +121,7 @@ create table VehicleMaintenance(
   on update no action 
   on delete no action
 );
---exec sys.sp_addextendedproperty "ms_description", "Maintenance Vehicle Identifier (PK)", "user", "dbo", "table", "vehiclemaintenance", "column","idVehiclemaintenance"
---exec sys.sp_addextendedproperty "ms_description", "Vehicle identifier (FK VEHICLE", "user", "dbo", "table", "vehiclemaintenance", "column", "idVehicle" 
---exec sys.sp_addextendedproperty "ms_description", "Maintenance identifier (FK MAINTENANCE)", "user", "dbo", "table", "vehiclemaintenance", "column","idmaintenance"
---exec sys.sp_addextendedproperty "ms_description", "Date Maintenance", "user", "dbo", "table", "vehiclemaintenance", "column","datemaintenance"
+
 --
 -- SchedulingS
 --
@@ -181,17 +159,7 @@ create table Scheduling(
     on delete cascade
     on update cascade
 );
---exec sys.sp_addextendedproperty "ms_description", "Scheduling identifier (PK)", "user", "dbo", "table", scheduling, "column", "idScheduling"
---exec sys.sp_addextendedproperty "ms_description", "Scheduled Scheduling Start Date", "user", "dbo", "table", scheduling, "column", "expectedstartdate"
---exec sys.sp_addextendedproperty "ms_description", " Scheduled Scheduling End Date", "user", "dbo", "table", scheduling, "column", "expectedenddate"
---exec sys.sp_addextendedproperty "ms_description", "Route identification (FK RouteS)", "user", "dbo", "table", scheduling, "column", "idRoute"
---exec sys.sp_addextendedproperty "ms_description", "Vehicle identification (FK VehicleS)", "user", "dbo", "table", scheduling, "column", "idVehicle"
---exec sys.sp_addextendedproperty "ms_description", "Driver Identification (FK DriverS)", "user", "dbo", "table", scheduling, "column", "idDriver"
---exec sys.sp_addextendedproperty "ms_description", "Start Date of Scheduling Performed", "user", "dbo", "table", scheduling, "column", "startdateperformed" 
---exec sys.sp_addextendedproperty "ms_description", "End date of appointment made", "user", "dbo", "table", scheduling, "column", "enddateperformed" 
---exec sys.sp_addextendedproperty "ms_description", "Mileage covered identification", "user", "dbo", "table", scheduling, "column", "endkm"
---exec sys.sp_addextendedproperty "ms_description", "Status identification, ending in (FK STATUSSCHEDULING)", "user", "dbo", "table", scheduling, "column", "idstatusscheduling" 
---exec sys.sp_addextendedproperty "ms_description", "Authentication identification (FK AUTHENTICATION)", "user", "dbo", "table", scheduling, "column", "idauthentication"
+
                                                
 INSERT INTO [Driver]
            ([Name]
