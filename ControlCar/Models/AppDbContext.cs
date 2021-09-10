@@ -98,7 +98,7 @@ namespace ControlCar.Models
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Rg).HasColumnType("numeric(10, 0)");
+                entity.Property(e => e.Rg).HasColumnType("varchar(38, 0)");
 
                 entity.Property(e => e.Sector)
                     .HasMaxLength(10)

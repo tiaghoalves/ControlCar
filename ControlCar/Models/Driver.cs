@@ -50,7 +50,7 @@ namespace ControlCar.Models
         
         [Display(Name = "RG")]
         [Required(ErrorMessage = "RG é obrigatório")]
-        public decimal Rg { get; set; }
+        public string Rg { get; set; }
 
         public virtual ICollection<Scheduling> Scheduling { get; set; }
     }
