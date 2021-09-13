@@ -1,7 +1,7 @@
 ﻿@model ControlCar.Models.Vehicle
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Veículo - Deletar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -82,7 +82,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdVehicle" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Deletar" class="btn btn-danger" /> |
+        <a asp-action="Index">Voltar para listagem</a>
     </form>
 </div>

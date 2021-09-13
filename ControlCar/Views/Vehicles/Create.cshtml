@@ -1,13 +1,13 @@
 ﻿@model ControlCar.Models.Vehicle
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Veículo - Criar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Criar</h1>
 
-<h4>Vehicle</h4>
+<h4>Veículo</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -68,14 +68,14 @@
                 <span asp-validation-for="Observation" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar para listagem</a>
 </div>
 
 @section Scripts {

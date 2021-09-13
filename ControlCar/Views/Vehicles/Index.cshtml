@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<ControlCar.Models.Vehicle>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista - Veículos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Novo Veículo</a>
 </p>
 <table class="table">
     <thead>
@@ -86,9 +86,9 @@
                 @Html.DisplayFor(modelItem => item.IdStatusVehicleNavigation.Description)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdVehicle">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdVehicle">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdVehicle">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdVehicle">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdVehicle">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdVehicle">Deletar</a>
             </td>
         </tr>
 }
