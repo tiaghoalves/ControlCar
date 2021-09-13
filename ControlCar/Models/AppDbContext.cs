@@ -1,6 +1,9 @@
 ﻿using System;
+using Microsoft.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -10,6 +13,8 @@ namespace ControlCar.Models
 {
     public partial class AppDbContext : DbContext
     {
+        public string connectionString { get; set; }
+
         public AppDbContext()
         {
         }
@@ -17,6 +22,12 @@ namespace ControlCar.Models
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
+            var sqlServerOptionsExtension = options.FindExtension<SqlServerOptionsExtension>();
+            
+            if (sqlServerOptionsExtension != null)
+            {
+                connectionString = sqlServerOptionsExtension.ConnectionString;
+            }
         }
 
         public virtual DbSet<Authentication> Authentication { get; set; }
@@ -33,8 +44,8 @@ namespace ControlCar.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-S7DE1RS;Initial Catalog=ControlCar;Integrated Security=True;Pooling=False");
+                optionsBuilder.UseSqlServer(connectionString);
+                
                 // UJUSTAR CONFIGURÃÇÕES CONFORME SERVIDOR
                 //optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=ControlCar;Integrated Security=True;Pooling=False");
             }
