@@ -45,9 +45,6 @@ namespace ControlCar.Models
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(connectionString);
-                
-                // UJUSTAR CONFIGURÃÇÕES CONFORME SERVIDOR
-                //optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=ControlCar;Integrated Security=True;Pooling=False");
             }
         }
 
