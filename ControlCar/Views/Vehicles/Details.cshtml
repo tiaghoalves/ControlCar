@@ -1,7 +1,7 @@
 ﻿@model ControlCar.Models.Vehicle
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Veículo - Detalhes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -80,6 +80,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.IdVehicle">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.IdVehicle">Editar</a> |
+    <a asp-action="Index">Voltar para listagem</a>
 </div>

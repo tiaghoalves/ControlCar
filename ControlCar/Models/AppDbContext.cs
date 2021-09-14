@@ -1,9 +1,6 @@
 ﻿using System;
-using Microsoft.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -13,8 +10,6 @@ namespace ControlCar.Models
 {
     public partial class AppDbContext : DbContext
     {
-        public string connectionString { get; set; }
-
         public AppDbContext()
         {
         }
@@ -22,12 +17,6 @@ namespace ControlCar.Models
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
-            var sqlServerOptionsExtension = options.FindExtension<SqlServerOptionsExtension>();
-            
-            if (sqlServerOptionsExtension != null)
-            {
-                connectionString = sqlServerOptionsExtension.ConnectionString;
-            }
         }
 
         public virtual DbSet<Authentication> Authentication { get; set; }
