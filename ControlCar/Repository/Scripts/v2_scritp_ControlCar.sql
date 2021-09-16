@@ -537,4 +537,5 @@ INSERT INTO [Scheduling]
            ,100);
 
 
-
+alter table Vehicle DROP COLUMN Year;
+alter table Vehicle add Year int not null;

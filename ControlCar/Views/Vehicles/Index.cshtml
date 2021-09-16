@@ -1,12 +1,8 @@
 ﻿@model IEnumerable<ControlCar.Models.Vehicle>
-
 @{
-    ViewData["Title"] = "Lista - Veículos";
+    ViewData["Title"] = "Veículos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Veículos</h1>
-
 <p>
     <a asp-action="Create">Novo Veículo</a>
 </p>
@@ -83,7 +79,10 @@
                 @Html.DisplayFor(modelItem => item.Observation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdStatusVehicleNavigation.Description)
+                @if (item.IdStatusVehicleNavigation != null && item.IdStatusVehicleNavigation.Description.Length != 0)
+                {
+                    @Html.DisplayFor(modelItem => item.IdStatusVehicleNavigation.Description)
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdVehicle">Editar</a> |

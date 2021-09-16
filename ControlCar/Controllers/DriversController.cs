@@ -32,8 +32,7 @@ namespace ControlCar.Controllers
                 return NotFound();
             }
 
-            var driver = await _context.Driver
-                .FirstOrDefaultAsync(m => m.IdDriver == id);
+            var driver = await _context.Driver.FirstOrDefaultAsync(m => m.IdDriver == id);
             if (driver == null)
             {
                 return NotFound();

@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ControlCar.Models;
+using ControlCar.Services;
 
 namespace ControlCar.Controllers
 {
     public class VehiclesController : Controller
     {
         private readonly AppDbContext _context;
+        private VehicleService _vehicleService;
 
         public VehiclesController(AppDbContext context)
         {
             _context = context;
+            _vehicleService = new VehicleService(context);
         }
 
         // GET: Vehicles
@@ -61,12 +64,28 @@ namespace ControlCar.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(vehicle);
+                
                 await _context.SaveChangesAsync();
                 
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["IdStatusVehicle"] = new SelectList(_context.StatusVehicle, "IdstatusVehicle", "Description", vehicle.IdStatusVehicle);
+            
             return View(vehicle);
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        public async Task<IActionResult> VerifyVehicleCreationRules(string board, int renavam)
+        {
+            var isValid = await _vehicleService.VehicleValidationRules(board, renavam);
+
+            if (!isValid)
+            {
+                return Json($"Placa ou renavam informados já existem.");
+            }
+
+            return Json(true);
         }
 
         // GET: Vehicles/Edit/5
@@ -118,7 +137,9 @@ namespace ControlCar.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["IdStatusVehicle"] = new SelectList(_context.StatusVehicle, "IdstatusVehicle", "Description", vehicle.IdStatusVehicle);
+
             return View(vehicle);
         }
 
@@ -130,9 +151,8 @@ namespace ControlCar.Controllers
                 return NotFound();
             }
 
-            var vehicle = await _context.Vehicle
-                .Include(v => v.IdStatusVehicleNavigation)
-                .FirstOrDefaultAsync(m => m.IdVehicle == id);
+            var vehicle = await _context.Vehicle.Include(v => v.IdStatusVehicleNavigation).FirstOrDefaultAsync(m => m.IdVehicle == id);
+
             if (vehicle == null)
             {
                 return NotFound();
@@ -147,8 +167,11 @@ namespace ControlCar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var vehicle = await _context.Vehicle.FindAsync(id);
+
             _context.Vehicle.Remove(vehicle);
+
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

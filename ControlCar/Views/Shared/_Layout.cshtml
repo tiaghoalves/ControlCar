@@ -13,13 +13,33 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <!-- CSS Files -->
-    <link href="~/Assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Assets/css/paper-dashboard.css" rel="stylesheet" />
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/css/paper-dashboard.css" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="~/assets/demo/demo.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="sidebar" data-color="white" data-active-color="danger">
+    <div class="wrapper">
+        <div class="main-panel">
+            <header>
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                    <div style="display: flex;flex: 1;width: 100%;">
+                        <h2 style="font-size: 33px;padding: 2px 20px;margin: 0;">@ViewData["Title"]</h2>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                </nav>
+            </header>
+            <div class="container-fluid" style="padding: 0 30px 0 30px; ">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar" data-color="white" data-background-color="white" data-active-color="info">
         <div class="logo">
             <a href="#" class="simple-text logo-mini">
                 <div class="logo-image-small">
@@ -30,12 +50,11 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li>
+                <li class="nav-item">
                     <i class="nc-icon nc-bank"></i>
                     <a class="nav-link text-dark" asp-area="" asp-controller="#" asp-action="Index">Agendamentos</a>
                 </li>
-
-                <li>
+                <li class="nav-item">
                     <i class="nc-icon nc-bank"></i>
                     <a class="nav-link text-dark" asp-area="" asp-controller="Drivers" asp-action="Index">Motorista</a>
                 </li>
@@ -51,27 +70,10 @@
                     <i class="nc-icon nc-bank"></i>
                     <a class="nav-link text-dark" asp-area="" asp-controller="#" asp-action="Index">Relatórios</a>
                 </li>
-                </li>
             </ul>
         </div>
     </div>
-
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Drivers" asp-action="Index">ControlCar</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </nav>
-    </header>
-    <div class="container-fluid" style="padding: 0 30px 0 30px; ">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

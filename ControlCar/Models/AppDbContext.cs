@@ -106,7 +106,7 @@ namespace ControlCar.Models
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Rg).HasColumnType("varchar(38, 0)");
+                entity.Property(e => e.Rg).HasColumnType("varchar(38)");
 
                 entity.Property(e => e.Sector)
                     .HasMaxLength(10)
@@ -241,7 +241,7 @@ namespace ControlCar.Models
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Chassi).HasColumnType("numeric(18, 0)");
+                entity.Property(e => e.Chassi).HasColumnType("varchar(38)");
 
                 entity.Property(e => e.Color)
                     .HasMaxLength(100)
@@ -252,17 +252,16 @@ namespace ControlCar.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Observation)
-                    .IsRequired()
                     .HasMaxLength(300)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Renavam).HasColumnType("numeric(18, 0)");
+                entity.Property(e => e.Renavam).HasColumnType("int");
 
                 entity.Property(e => e.Type)
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Year).HasColumnType("datetime");
+                entity.Property(e => e.Year).HasColumnType("int");
 
                 entity.HasOne(d => d.IdStatusVehicleNavigation)
                     .WithMany(p => p.Vehicle)

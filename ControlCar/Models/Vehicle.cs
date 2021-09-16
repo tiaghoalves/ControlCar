@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,7 +16,7 @@ namespace ControlCar.Models
         {
             Scheduling = new HashSet<Scheduling>();
             VehicleMaintenance = new HashSet<VehicleMaintenance>();
-        }
+        } 
 
         public int IdVehicle { get; set; }
 
@@ -27,6 +28,7 @@ namespace ControlCar.Models
         [Required(ErrorMessage = "KM é obrigatório")]
         public double Km { get; set; }
 
+        [Remote(action: "VerifyVehicleCreationRules", controller: "Vehicles", AdditionalFields = nameof(Board))]
         [Display(Name = "Placa")]
         public string Board { get; set; }
 
@@ -41,15 +43,16 @@ namespace ControlCar.Models
 
         [Display(Name = "Ano")]
         [Required(ErrorMessage = "Ano é obrigatório")]
-        public DateTime Year { get; set; }
+        public int Year { get; set; }
 
+        [Remote(action: "VerifyVehicleCreationRules", controller: "Vehicles", AdditionalFields = nameof(Board))]
         [Display(Name = "Renavam")]
         [Required(ErrorMessage = "Número do Renavam é obrigatório")]
-        public decimal Renavam { get; set; }
+        public int Renavam { get; set; }
 
         [Display(Name = "Chassi")]
         [Required(ErrorMessage = "Número do chassi é obrigatório")]
-        public decimal Chassi { get; set; }
+        public string Chassi { get; set; }
 
         [Display(Name = "Status Veículo")]
         public int? IdStatusVehicle { get; set; }
