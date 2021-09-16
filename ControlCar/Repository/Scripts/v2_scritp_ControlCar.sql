@@ -536,6 +536,18 @@ INSERT INTO [Scheduling]
            ,2000
            ,100);
 
-
 alter table Vehicle DROP COLUMN Year;
 alter table Vehicle add Year int not null;
+
+
+INSERT INTO [dbo].[StatusVehicle]
+           ([Description])
+     VALUES
+           ('ACTIVE');
+GO
+
+INSERT INTO [dbo].[StatusVehicle]
+           ([Description])
+     VALUES
+           ('INACTIVE');
+GO
