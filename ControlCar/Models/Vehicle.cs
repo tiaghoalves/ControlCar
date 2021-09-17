@@ -30,6 +30,7 @@ namespace ControlCar.Models
 
         [Remote(action: "VerifyVehicleCreationRules", controller: "Vehicles", AdditionalFields = nameof(Board))]
         [Display(Name = "Placa")]
+        [Required(ErrorMessage = "Placa é obrigatória")]
         public string Board { get; set; }
 
         [Display(Name = "Tipo")]

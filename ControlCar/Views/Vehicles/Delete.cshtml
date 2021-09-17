@@ -82,7 +82,14 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdVehicle" />
-        <input type="submit" value="Deletar" class="btn btn-danger" /> |
-        <a asp-action="Index">Voltar para listagem</a>
+         @if (ViewBag.alreadySchedule)
+         {
+            <input type="submit" value="Deletar" class="btn btn-danger" disabled />
+         }
+         else
+         {
+            <input type="submit" value="Deletar" class="btn btn-danger" />
+         }
+         | <a asp-action="Index">Voltar para listagem</a>
     </form>
 </div>

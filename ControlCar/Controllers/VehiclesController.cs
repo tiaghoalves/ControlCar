@@ -108,7 +108,7 @@ namespace ControlCar.Controllers
         // POST: Vehicles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPut]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdVehicle,Model,Km,Board,Type,Brand,Color,Year,Renavam,Chassi,IdStatusVehicle,Observation")] Vehicle vehicle)
         {
@@ -151,6 +151,8 @@ namespace ControlCar.Controllers
                 return NotFound();
             }
 
+            ViewBag.alreadySchedule = _context.Scheduling.Any(e => e.IdVehicle == id);
+
             var vehicle = await _context.Vehicle.Include(v => v.IdStatusVehicleNavigation).FirstOrDefaultAsync(m => m.IdVehicle == id);
 
             if (vehicle == null)
@@ -167,7 +169,7 @@ namespace ControlCar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var vehicle = await _context.Vehicle.FindAsync(id);
-
+            
             _context.Vehicle.Remove(vehicle);
 
             await _context.SaveChangesAsync();

@@ -15,6 +15,7 @@ namespace ControlCar.Models
         }
 
         public int IdstatusVehicle { get; set; }
+        
         public string Description { get; set; }
 
         public virtual ICollection<Vehicle> Vehicle { get; set; }

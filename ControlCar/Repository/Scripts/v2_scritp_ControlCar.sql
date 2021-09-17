@@ -136,7 +136,7 @@ create table Scheduling(
   ,EndDatePerformed       datetime       null -- End date of appointment made
   ,EndKm                   float          null -- Mileage covered identification
   ,IdStatusScheduling      int            null -- Status identification, ending in
-  ,IdAuthentication           int            null -- Authentication identification
+  ,IdAuthentication           int         not null -- Authentication identification
   ,constraint pk_Scheduling primary key nonclustered (idScheduling)
   , constraint fk_Scheduling_Route foreign key (idRoute)
     references Route (idRoute)
@@ -155,7 +155,7 @@ create table Scheduling(
     on delete cascade
     on update cascade
   , constraint fk_Scheduling_authentication foreign key (IdAuthentication)
-    references Authentication (idAuthentication)
+    references Authentication (IdAuthentication)
     on delete cascade
     on update cascade
 );
