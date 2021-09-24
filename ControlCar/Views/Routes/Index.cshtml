@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ControlCar.Models.Route>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Source)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Destiny)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KmPattern)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Source)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destiny)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KmPattern)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdRoute">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdRoute">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdRoute">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
