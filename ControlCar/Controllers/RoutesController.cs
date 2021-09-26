@@ -148,5 +148,16 @@ namespace ControlCar.Controllers
         {
             return _context.Route.Any(e => e.IdRoute == id);
         }
+
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult VerifyRouteCreationRules(string source, string destiny)
+        {
+            if (source.Equals(destiny))
+            {
+                return Json($"Origem e destino informados são iguais.");
+            }
+
+            return Json(true);
+        }
     }
 }
