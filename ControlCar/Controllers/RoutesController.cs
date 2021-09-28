@@ -150,11 +150,21 @@ namespace ControlCar.Controllers
         }
 
         [AcceptVerbs("GET", "POST")]
-        public IActionResult VerifyRouteCreationRules(string source, string destiny)
+        public async Task<IActionResult> VerifyRouteCreationRules(string source, string destiny)
         {
             if (source.Equals(destiny))
             {
                 return Json($"Origem e destino informados são iguais.");
+            }
+
+            if (source != null && destiny != null)
+            {
+                var routeAlreadyExists = await _context.Route.FirstOrDefaultAsync(r => r.Source == source && r.Destiny == destiny);
+            
+                if (routeAlreadyExists != null)
+                {
+                    return Json($"Origem e destino já cadastrados.");
+                }
             }
 
             return Json(true);
