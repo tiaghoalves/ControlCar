@@ -1,0 +1,87 @@
+﻿/* GERAIS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica;
+    color: #323232;
+    border: none;
+}
+
+body {
+  /*background-image: url('../img/86281.jpg');*/
+  background-size: cover;
+}
+
+textarea:focus, input:focus {
+    outline: none;
+}
+
+a, label {
+    font-size: .9rem;
+}
+
+a.hover {
+    color: #085588;
+}
+
+/* LOGIN */
+
+#login-container {
+    background-color: white;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 30px;
+    margin-top: 12vh;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Formulário */
+
+form {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+label, input {
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+input {
+    border-bottom: 2px solid #323232;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+input:focus {
+    border-bottom: 2px solid #7bc3ba;
+}
+
+#forgot-pass {
+    text-align: right;
+    display: block;
+}
+
+input[type="submit"] {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    height: 40px;
+    border-radius: 10px;
+    margin-top: 30px;
+    color: white;
+    background-color: #7bc3ba;
+    cursor: pointer;
+}
+
+/* REGISTRAR */
+
+#register-container p {
+    margin-bottom: 10px;
+}

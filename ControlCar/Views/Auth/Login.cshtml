@@ -1,0 +1,24 @@
+﻿@model ControlCar.Models.Authentication
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<h1>Seja bem-vindo!</h1>
+<form asp-action="SignIn">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <label asp-for="Email">E-mail</label>
+    <input asp-for="Email" type="email" name="email" id="id_email">
+    <span asp-validation-for="Email" class="text-danger"></span>
+
+    <label asp-for="Password">Senha</label>
+    <input type="password" name="password" id="id_password" asp-for="Password">
+    <span asp-validation-for="Password" class="text-danger"></span>
+
+    <input type="submit" value="Entrar">
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
