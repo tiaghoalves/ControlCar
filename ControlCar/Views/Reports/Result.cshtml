@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ControlCar.Models.Scheduling>
+
+@{
+    ViewData["Title"] = "Resultado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Resultado</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDatePerformed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDatePerformed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndKm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAuthentication)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDriverNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdRouteNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdSchedulingNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdStatusSchedulingNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdVehicleNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpectedStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpectedEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDatePerformed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDatePerformed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndKm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAuthentication)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDriverNavigation.Cpf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdRouteNavigation.IdRoute)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSchedulingNavigation.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdStatusSchedulingNavigation.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdVehicleNavigation.Board)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index">Voltar para os parâmetros</a>
+</div>
