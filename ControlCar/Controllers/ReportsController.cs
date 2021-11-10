@@ -38,17 +38,25 @@ namespace ControlCar.Controllers
         {
             try
             {
-                int[] drivers = new int[1]
-                {
-                    vm.IdDriver
-                };
-  
+                var driver = _context.Driver.FirstOrDefault(d => d.IdDriver == vm.IdDriver);
+                var vehicle = _context.Vehicle.FirstOrDefault(d => d.IdVehicle == vm.IdVehicle);
+                var route = _context.Route.FirstOrDefault(d => d.IdRoute == vm.IdRoute);
+                var query = _context.Scheduling
+                            .Select(s => new Report()
+                            {
+                                Id = s.IdScheduling,
+                                ExpectedStartDate = s.ExpectedStartDate,
+                                ExpectedEndDate = s.ExpectedEndDate,
+                                StartDatePerformed = s.StartDatePerformed,
+                                EndDatePerformed = s.EndDatePerformed,
+                                EndKm = s.EndKm,
+                                Driver = driver,
+                                Vehicle = vehicle,
+                                Route = route
+                            })
+                            .ToList();
 
-                var schedulings = _context.Scheduling
-                        .Where(s => s.ExpectedStartDate >= vm.InitialDate && s.ExpectedEndDate <= vm.EndDate)
-                        .ToList();
-
-                return View("Result", schedulings);
+                return View("Result", query);
             }
             catch
             {

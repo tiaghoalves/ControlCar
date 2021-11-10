@@ -1,12 +1,12 @@
-﻿@model IEnumerable<ControlCar.Models.Scheduling>
+﻿@model IEnumerable<ControlCar.Models.Report>
 
 @{
-    ViewData["Title"] = "Resultado";
+    ViewData["Title"] = "Resultados";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Resultado</h1>
-
+<div>
+    <a asp-action="Index">Voltar para os parâmetros</a>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -26,22 +26,13 @@
                 @Html.DisplayNameFor(model => model.EndKm)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdAuthentication)
+                @Html.DisplayNameFor(model => model.Driver)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdDriverNavigation)
+                @Html.DisplayNameFor(model => model.Vehicle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdRouteNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdSchedulingNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdStatusSchedulingNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdVehicleNavigation)
+                @Html.DisplayNameFor(model => model.Route)
             </th>
             <th></th>
         </tr>
@@ -65,27 +56,24 @@
                 @Html.DisplayFor(modelItem => item.EndKm)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdAuthentication)
+                @if (item.Driver != null && item.Driver.Name != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Driver.Name)
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdDriverNavigation.Cpf)
+                @if (item.Vehicle != null && item.Vehicle.Model != null)
+                { 
+                    @Html.DisplayFor(modelItem => item.Vehicle.Model)
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdRouteNavigation.IdRoute)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdSchedulingNavigation.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdStatusSchedulingNavigation.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdVehicleNavigation.Board)
+                @if (item.Route != null && item.Route.RouteDesc != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Route.RouteDesc)
+                }
             </td>
         </tr>
 }
     </tbody>
 </table>
-<div>
-    <a asp-action="Index">Voltar para os parâmetros</a>
-</div>
