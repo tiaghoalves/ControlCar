@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ControlCar.Models.Scheduling>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDatePerformed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDatePerformed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndKm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAuthentication)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDriverNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdRouteNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdSchedulingNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdStatusSchedulingNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdVehicleNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDatePerformed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDatePerformed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndKm)
+        </td>
+        <td>
+            @if (item.IdDriverNavigation != null && item.IdDriverNavigation.Name != null)
+            {
+                @Html.DisplayFor(modelItem => item.IdDriverNavigation.Name)
+            }
+        </td>
+        <td>
+            @if (item.IdVehicleNavigation != null && item.IdVehicleNavigation.Model != null)
+            {
+                @Html.DisplayFor(modelItem => item.IdVehicleNavigation.Model)
+            }
+        </td>
+        <td>
+            @if (item.IdRouteNavigation != null && item.IdRouteNavigation.RouteDesc != null)
+            {
+                @Html.DisplayFor(modelItem => item.IdRouteNavigation.RouteDesc)
+            }
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.IdScheduling">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.IdScheduling">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.IdScheduling">Delete</a>
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,72 @@
+﻿@model ControlCar.Models.Scheduling
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<h4>Scheduling</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ExpectedStartDate" class="control-label"></label>
+                <input asp-for="ExpectedStartDate" class="form-control" />
+                <span asp-validation-for="ExpectedStartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpectedEndDate" class="control-label"></label>
+                <input asp-for="ExpectedEndDate" class="form-control" />
+                <span asp-validation-for="ExpectedEndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdRoute" class="control-label"></label>
+                <select asp-for="IdRoute" class ="form-control" asp-items="ViewBag.IdRoute"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdVehicle" class="control-label"></label>
+                <select asp-for="IdVehicle" class ="form-control" asp-items="ViewBag.IdVehicle"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdDriver" class="control-label"></label>
+                <select asp-for="IdDriver" class ="form-control" asp-items="ViewBag.IdDriver"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDatePerformed" class="control-label"></label>
+                <input asp-for="StartDatePerformed" class="form-control" />
+                <span asp-validation-for="StartDatePerformed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDatePerformed" class="control-label"></label>
+                <input asp-for="EndDatePerformed" class="form-control" />
+                <span asp-validation-for="EndDatePerformed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndKm" class="control-label"></label>
+                <input asp-for="EndKm" class="form-control" />
+                <span asp-validation-for="EndKm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdStatusScheduling" class="control-label"></label>
+                <select asp-for="IdStatusScheduling" class ="form-control" asp-items="ViewBag.IdStatusScheduling"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdAuthentication" class="control-label"></label>
+                <input asp-for="IdAuthentication" class="form-control" />
+                <span asp-validation-for="IdAuthentication" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
