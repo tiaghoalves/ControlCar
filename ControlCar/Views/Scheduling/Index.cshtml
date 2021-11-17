@@ -6,15 +6,12 @@
 }
 
 <div class="form_scheduling">
-    <div class="column1">
-        <div>
+    <div class="column1" style="display: inline-block;width:33%;">
+        <div class="form-group">
             <p>Data inicial:</p>
             <input id="date" type="date">
             <p>Hora inicial:</p>
             <input id="date" type="time">
-        </div>
-
-        <div>
             <p>Data Final:</p>
             <input id="date" type="date">
             <p>Hora final:</p>
@@ -22,8 +19,8 @@
         </div>
     </div>
 
-    <div class="column2">
-        <div>
+    <div class="column2" style="display: inline-block;width:33%;">
+        <div class="form-group">
             <p>Selecione o Motorista:</p>
             <select name="select">
                 <option>Motorista 1</option>
@@ -34,15 +31,12 @@
         </div>
     </div>
 
-    <div class="column3">
-        <div>
+    <div class="column3" style="display: inline-block;width:32%;">
+        <div class="form-group">
             <p>Selecione o Veículo:</p>
             <select name="select">
                 <option>Veículo 1</option>
             </select>
-        </div>
-
-        <div>
             <p>Selecione a Rota:</p>
             <select name="select">
                 <option>Rota 1</option>
@@ -52,51 +46,51 @@
 
 </div>
 
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Início Previsto
+            </th>
+            <th>
+                Final Previsto
+            </th>
+            <th>
+                Data inicial realizada
+            </th>
+            <th>
+                Data final realizada
+            </th>
+            <th>
+                Origem
+            </th>
+            <th>
+                Destino
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
                 <th>
-                    Início Previsto
+                    Data Início
                 </th>
                 <th>
-                    Final Previsto
+                    Data fim
                 </th>
                 <th>
-                    Data inicial realizada
+                    Data realizada
                 </th>
-                <th>
-                    Data final realizada
-                </th>
-                <th>
-                    Origem
-                </th>
-                <th>
-                    Destino
-                </th>
-                <th>
-                    Status
-                </th>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdRoute">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdRoute">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdRoute">Deletar</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <th>
-                        Data Início
-                    </th>
-                    <th>
-                        Data fim
-                    </th>
-                    <th>
-                        Data realizada
-                    </th>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.IdRoute">Editar</a> |
-                        <a asp-action="Details" asp-route-id="@item.IdRoute">Detalhes</a> |
-                        <a asp-action="Delete" asp-route-id="@item.IdRoute">Deletar</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
