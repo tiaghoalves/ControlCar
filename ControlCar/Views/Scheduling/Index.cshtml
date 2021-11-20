@@ -5,47 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="form_scheduling">
-    <div class="column1" style="display: inline-block;width:33%;">
-        <div class="form-group">
-            <p>Data inicial:</p>
-            <input id="date" type="date">
-            <p>Hora inicial:</p>
-            <input id="date" type="time">
-            <p>Data Final:</p>
-            <input id="date" type="date">
-            <p>Hora final:</p>
-            <input id="date" type="time">
-        </div>
-    </div>
-
-    <div class="column2" style="display: inline-block;width:33%;">
-        <div class="form-group">
-            <p>Selecione o Motorista:</p>
-            <select name="select">
-                <option>Motorista 1</option>
-            </select>
-            <p>Nome:</p>
-            <p>Setor:</p>
-            <p>Cargo:</p>
-        </div>
-    </div>
-
-    <div class="column3" style="display: inline-block;width:32%;">
-        <div class="form-group">
-            <p>Selecione o Veículo:</p>
-            <select name="select">
-                <option>Veículo 1</option>
-            </select>
-            <p>Selecione a Rota:</p>
-            <select name="select">
-                <option>Rota 1</option>
-            </select>
-        </div>
-    </div>
-
-</div>
-
+<p>
+    <a asp-action="Create">Criar agendamento</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -56,19 +18,25 @@
                 Final Previsto
             </th>
             <th>
-                Data inicial realizada
+                Início realizado
             </th>
             <th>
-                Data final realizada
+                Final realizado
             </th>
             <th>
-                Origem
-            </th>
-            <th>
-                Destino
+                Km final
             </th>
             <th>
                 Status
+            </th>
+            <th>
+                Motorista
+            </th>
+            <th>
+                Veículo
+            </th>
+            <th>
+                Rota
             </th>
         </tr>
     </thead>
@@ -76,19 +44,47 @@
         @foreach (var item in Model)
         {
             <tr>
-                <th>
-                    Data Início
-                </th>
-                <th>
-                    Data fim
-                </th>
-                <th>
-                    Data realizada
-                </th>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdRoute">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdRoute">Detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdRoute">Deletar</a>
+                    @Html.DisplayFor(modelItem => item.ExpectedStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpectedEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDatePerformed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDatePerformed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndKm)
+                </td>
+                <td>
+                    @if (item.IdStatusSchedulingNavigation != null && item.IdStatusSchedulingNavigation.Description != null)
+                    { 
+                        @Html.DisplayFor(modelItem => item.IdStatusSchedulingNavigation.Description)
+                    }
+                </td>
+                <td>
+                    @if (item.IdDriverNavigation != null && item.IdDriverNavigation.DriverDesc != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.IdDriverNavigation.DriverDesc)
+                    }
+                </td>
+                <td>
+                    @if (item.IdVehicleNavigation != null && item.IdVehicleNavigation.Model != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.IdVehicleNavigation.Model)
+                    }
+                </td>
+                <td>
+                    @if (item.IdRouteNavigation != null && item.IdRouteNavigation.RouteDesc != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.IdRouteNavigation.RouteDesc)
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdScheduling">Editar</a>
                 </td>
             </tr>
         }

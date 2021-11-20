@@ -32,7 +32,7 @@ namespace ControlCar.Models
         [Display(Name = "Km Padrão")]
         public double? KmPattern { get; set; }
 
-        public string RouteDesc { 
+        public string RouteDesc {
             get 
             {
                 return Source + " até " + Destiny;

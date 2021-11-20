@@ -1,17 +1,15 @@
-﻿@model ControlCar.Models.Scheduling
+﻿@model ControlCar.Models.ViewModel.SchedulingViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Agendamento";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
-
-<h4>Scheduling</h4>
+<h4>Agendamento</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Index">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ExpectedStartDate" class="control-label"></label>
@@ -23,50 +21,35 @@
                 <input asp-for="ExpectedEndDate" class="form-control" />
                 <span asp-validation-for="ExpectedEndDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdRoute" class="control-label"></label>
-                <select asp-for="IdRoute" class ="form-control" asp-items="ViewBag.IdRoute"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdVehicle" class="control-label"></label>
-                <select asp-for="IdVehicle" class ="form-control" asp-items="ViewBag.IdVehicle"></select>
-            </div>
-            <div class="form-group">
+            <div class="form-group" style="display: flex;flex-direction: column;">
                 <label asp-for="IdDriver" class="control-label"></label>
-                <select asp-for="IdDriver" class ="form-control" asp-items="ViewBag.IdDriver"></select>
+                <select asp-for="IdDriver" asp-items="@(new SelectList(Model.Drivers, nameof(Driver.IdDriver), nameof(Driver.DriverDesc)))">
+                    <option>Selecione um motorista</option>
+                </select>
+                <span asp-validation-for="Drivers" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display: flex;flex-direction: column;">
+                <label asp-for="IdVehicle" class="control-label"></label>
+                <select asp-for="IdVehicle" asp-items="@(new SelectList(Model.Vehicles, nameof(Vehicle.IdVehicle), nameof(Vehicle.Model)))">
+                    <option>Selecione um veículo</option>
+                </select>
+                <span asp-validation-for="Vehicles" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display: flex;flex-direction: column;">
+                <label asp-for="IdRoute" class="control-label"></label>
+                <select asp-for="IdRoute" asp-items="@(new SelectList(Model.Routes, nameof(Route.IdRoute), nameof(Route.RouteDesc)))">
+                    <option>Selecione uma rota</option>
+                </select>
+                <span asp-validation-for="Routes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StartDatePerformed" class="control-label"></label>
-                <input asp-for="StartDatePerformed" class="form-control" />
-                <span asp-validation-for="StartDatePerformed" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDatePerformed" class="control-label"></label>
-                <input asp-for="EndDatePerformed" class="form-control" />
-                <span asp-validation-for="EndDatePerformed" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndKm" class="control-label"></label>
-                <input asp-for="EndKm" class="form-control" />
-                <span asp-validation-for="EndKm" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdStatusScheduling" class="control-label"></label>
-                <select asp-for="IdStatusScheduling" class ="form-control" asp-items="ViewBag.IdStatusScheduling"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdAuthentication" class="control-label"></label>
-                <input asp-for="IdAuthentication" class="form-control" />
-                <span asp-validation-for="IdAuthentication" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Ver agendamentos</a>
 </div>
 
