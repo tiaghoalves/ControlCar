@@ -26,6 +26,8 @@ namespace ControlCar.Controllers
             var query = _context.Scheduling
                     .Include(s => s.IdStatusSchedulingNavigation)
                     .Include(s => s.IdRouteNavigation)
+                    .Include(s => s.IdDriverNavigation)
+                    .Include(s => s.IdVehicleNavigation)
                     .ToList();
 
             return View("Index", query);
