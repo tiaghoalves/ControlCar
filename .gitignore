@@ -366,4 +366,5 @@ ControlCar/appsettings.json
 /ControlCar/Views/Login/Index.cshtml
 /ControlCar/Views/Shared/Login.cshtml
 
-ControlCar/credenditals.txt
+ControlCar/bin/Debug/netcoreapp3.1/credenditals.txt
+ControlCar/bin/Release/netcoreapp3.1/credenditals.txt
