@@ -365,3 +365,5 @@ FodyWeavers.xsd
 ControlCar/appsettings.json
 /ControlCar/Views/Login/Index.cshtml
 /ControlCar/Views/Shared/Login.cshtml
+
+ControlCar/credenditals.txt
