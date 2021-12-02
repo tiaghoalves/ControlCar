@@ -551,3 +551,44 @@ INSERT INTO [dbo].[StatusVehicle]
      VALUES
            ('INACTIVE');
 GO
+
+
+
+
+
+
+-- Insere o usuário Administrador padrão
+insert into [Authentication] ([User], Email, [Password]) values ('Administrador', 'admin@admin.com', 'Aa123');
+
+-- Insere os status de agendamento disponíveis
+insert into [StatusScheduling] ([Description]) values ('AGUARDANDO');
+insert into [StatusScheduling] ([Description]) values ('INICIADO');
+insert into [StatusScheduling] ([Description]) values ('FINALIZADO');
+
+-- Insere Motoristas
+INSERT INTO [dbo].[Driver]([Name],[Cpf],[ExpirationDateCnh],[Office],[Address],[Cellphone],[TypeDriver],[BirthDate],[Sector],[Rg]) VALUES('Miguel      ','92022631201','','Motorista','São Paulo	     ','05198540132','Freteiro','','Frota','2001628596');
+INSERT INTO [dbo].[Driver]([Name],[Cpf],[ExpirationDateCnh],[Office],[Address],[Cellphone],[TypeDriver],[BirthDate],[Sector],[Rg]) VALUES('Davi        ','92032631202','','Motorista','Rio de Janeiro','05198542026','Freteiro','','Frota','3002628596');
+INSERT INTO [dbo].[Driver]([Name],[Cpf],[ExpirationDateCnh],[Office],[Address],[Cellphone],[TypeDriver],[BirthDate],[Sector],[Rg]) VALUES('Arthur      ','92042631203','','Motorista','Salvador       ','05198542036','Freteiro','','Frota','4003628596');
+INSERT INTO [dbo].[Driver]([Name],[Cpf],[ExpirationDateCnh],[Office],[Address],[Cellphone],[TypeDriver],[BirthDate],[Sector],[Rg]) VALUES('Pedro       ','92052631204','','Motorista','Brasília       ','05198542046','Freteiro','','Frota','5004628596');
+INSERT INTO [dbo].[Driver]([Name],[Cpf],[ExpirationDateCnh],[Office],[Address],[Cellphone],[TypeDriver],[BirthDate],[Sector],[Rg]) VALUES('Gabriel     ','92062631205','','Motorista','Fortaleza       ','05198540532','Freteiro','','Frota','6005628596');
+INSERT INTO [dbo].[Driver]([Name],[Cpf],[ExpirationDateCnh],[Office],[Address],[Cellphone],[TypeDriver],[BirthDate],[Sector],[Rg]) VALUES('Bernardo    ','92072631206','','Motorista','Belo Horizonte','05198542066','Freteiro','','Frota','7006628596');
+INSERT INTO [dbo].[Driver]([Name],[Cpf],[ExpirationDateCnh],[Office],[Address],[Cellphone],[TypeDriver],[BirthDate],[Sector],[Rg]) VALUES('Lucas       ','92082631207','','Motorista','Manaus         ','05198542076','Freteiro','','Frota','8007628596');
+INSERT INTO [dbo].[Driver]([Name],[Cpf],[ExpirationDateCnh],[Office],[Address],[Cellphone],[TypeDriver],[BirthDate],[Sector],[Rg]) VALUES('Matheus     ','92092631208','','Motorista','Curitiba       ','05198542086','Freteiro','','Frota','9008628596');
+INSERT INTO [dbo].[Driver]([Name],[Cpf],[ExpirationDateCnh],[Office],[Address],[Cellphone],[TypeDriver],[BirthDate],[Sector],[Rg]) VALUES('Rafael      ','92102631209','','Motorista','Recife         ','05198542096','Freteiro','','Frota','0009628596');
+INSERT INTO [dbo].[Driver]([Name],[Cpf],[ExpirationDateCnh],[Office],[Address],[Cellphone],[TypeDriver],[BirthDate],[Sector],[Rg]) VALUES('Heitor      ','92112631210','','Motorista','Porto Alegre   ','05198542106','Freteiro','','Frota','1010628596');
+
+-- Insere veiculos
+insert into [dbo].Vehicle (Model, km,  Board, Type, Brand,  Color, Year, Renavam,Chassi, IdStatusVehicle,Observation) values ( 'Gol'   ,  500, 'Volkswagen' , 'Hatch', '','Preto'    , 2010, 1231567, '113452789', 1, 'observação');
+insert into [dbo].Vehicle (Model, km,  Board, Type, Brand,  Color, Year, Renavam,Chassi, IdStatusVehicle,Observation) values ( 'Palio'       ,  500, 'Fiat'       , 'Hatch', '','Branco'   , 2010, 1244567, '123453789', 1, 'observação');
+insert into [dbo].Vehicle (Model, km,  Board, Type, Brand,  Color, Year, Renavam,Chassi, IdStatusVehicle,Observation) values ( 'Uno'         ,  500, 'Fiat'       , 'Hatch', '','Vermelho' , 2010, 2234567, '133454789', 1, 'observação');
+insert into [dbo].Vehicle (Model, km,  Board, Type, Brand,  Color, Year, Renavam,Chassi, IdStatusVehicle,Observation) values ( 'Fiesta'      ,  500, 'Ford'       , 'Hatch', '','Azul'     , 2010, 1334567, '143455789', 1, 'observação');
+insert into [dbo].Vehicle (Model, km,  Board, Type, Brand,  Color, Year, Renavam,Chassi, IdStatusVehicle,Observation) values ( 'Celta'  ,  500, 'Chevrolet'  , 'Hatch', '','Preto'    , 2010, 1235567, '153456789', 1, 'observação');
+
+-- Insere rotas
+insert into [dbo].Route (Source, Destiny, KmPattern) values ('São Paulo     ','Rio de Janeiro',01600);
+insert into [dbo].Route (Source, Destiny, KmPattern) values ('Rio de Janeiro','Salvador      ',02600);
+insert into [dbo].Route (Source, Destiny, KmPattern) values ('Salvador      ','Brasília      ',03600);
+insert into [dbo].Route (Source, Destiny, KmPattern) values ('Brasília      ','Fortaleza     ',04600);
+insert into [dbo].Route (Source, Destiny, KmPattern) values ('Fortaleza     ','Belo Horizonte',05600);
+insert into [dbo].Route (Source, Destiny, KmPattern) values ('Belo Horizonte','Manaus        ',06600);
+insert into [dbo].Route (Source, Destiny, KmPattern) values ('Manaus        ','Curitiba      ',07600);
