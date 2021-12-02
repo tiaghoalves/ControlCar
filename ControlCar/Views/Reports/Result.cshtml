@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ControlCar.Models.Report>
+
+@{
+    ViewData["Title"] = "Resultados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <a asp-action="Index">Voltar para os parâmetros</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDatePerformed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDatePerformed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndKm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Route)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpectedStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpectedEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDatePerformed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDatePerformed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndKm)
+            </td>
+            <td>
+                @if (item.Driver != null && item.Driver.Name != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Driver.Name)
+                }
+            </td>
+            <td>
+                @if (item.Vehicle != null && item.Vehicle.Model != null)
+                { 
+                    @Html.DisplayFor(modelItem => item.Vehicle.Model)
+                }
+            </td>
+            <td>
+                @if (item.Route != null && item.Route.RouteDesc != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Route.RouteDesc)
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

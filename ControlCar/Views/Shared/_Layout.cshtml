@@ -32,7 +32,7 @@
                     </div>
                 </nav>
             </header>
-            <div class="container-fluid" style="padding: 0 30px 0 30px; ">
+            <div class="container-fluid" style="padding: 0 30px 0 30px; overflow: auto;">
                 <main role="main" class="pb-3">
                     @RenderBody()
                 </main>
@@ -52,7 +52,7 @@
             <ul class="nav">
                 <li class="nav-item">
                     <i class="nc-icon nc-bank"></i>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="#" asp-action="Index">Agendamentos</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Scheduling" asp-action="Create">Agendamentos</a>
                 </li>
                 <li class="nav-item">
                     <i class="nc-icon nc-bank"></i>
@@ -68,7 +68,11 @@
                 </li>
                 <li class="nav-item">
                     <i class="nc-icon nc-bank"></i>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="#" asp-action="Index">Relatórios</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Reports" asp-action="Index">Relatórios</a>
+                </li>
+                <li class="nav-item">
+                    <i class="nc-icon nc-bank"></i>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Index">Usuários</a>
                 </li>
             </ul>
         </div>

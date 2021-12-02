@@ -51,6 +51,13 @@ namespace ControlCar.Models
         [Display(Name = "RG")]
         [Required(ErrorMessage = "RG é obrigatório")]
         public string Rg { get; set; }
+        public string DriverDesc
+        {
+            get
+            {
+                return Name + " | " + Sector + " | " + Office;
+            }
+        }
 
         public virtual ICollection<Scheduling> Scheduling { get; set; }
     }

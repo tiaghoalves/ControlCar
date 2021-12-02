@@ -32,6 +32,13 @@ namespace ControlCar.Models
         [Display(Name = "Km Padrão")]
         public double? KmPattern { get; set; }
 
+        public string RouteDesc {
+            get 
+            {
+                return Source + " até " + Destiny;
+            }
+        }
+
         public virtual ICollection<Scheduling> Scheduling { get; set; }
     }
 }

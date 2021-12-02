@@ -1,0 +1,60 @@
+﻿@model ControlCar.Models.ViewModel.ParametersViewModel
+
+@{
+    ViewData["Title"] = "Relatório";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Parâmetros</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Result">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="InitialDate" class="control-label"></label>
+                <input asp-for="InitialDate" class="form-control" />
+                <span asp-validation-for="InitialDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display: flex;flex-direction: column;">
+                <label asp-for="IdDriver" class="control-label"></label>
+                <select asp-for="IdDriver" asp-items="@(new SelectList(Model.Drivers, nameof(Driver.IdDriver), nameof(Driver.Name)))">
+                    <option>Selecione um motorista</option>
+                </select>
+                <span asp-validation-for="Drivers" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display: flex;flex-direction: column;">
+                <label asp-for="IdVehicle" class="control-label"></label>
+                <select asp-for="IdVehicle" asp-items="@(new SelectList(Model.Vehicles, nameof(Vehicle.IdVehicle), nameof(Vehicle.Model)))">
+                    <option>Selecione um veículo</option>
+                </select>
+                <span asp-validation-for="Vehicles" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display: flex;flex-direction: column;">
+                <label asp-for="IdRoute" class="control-label"></label>
+                <select asp-for="IdRoute" asp-items="@(new SelectList(Model.Routes, nameof(Route.IdRoute), nameof(Route.RouteDesc)))">
+                    <option>Selecione uma rota</option>
+                </select>
+                <span asp-validation-for="Routes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InitKmVehicle" class="control-label"></label>
+                <input asp-for="InitKmVehicle" class="form-control" />
+                <span asp-validation-for="InitKmVehicle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndKmVehicle" class="control-label"></label>
+                <input asp-for="EndKmVehicle" class="form-control" />
+                <span asp-validation-for="EndKmVehicle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Gerar Relatório Gerencial" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

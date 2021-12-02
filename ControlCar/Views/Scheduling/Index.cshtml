@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ControlCar.Models.Scheduling>
+
+@{
+    ViewData["Title"] = "Cadastro de Agendamentos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    <a asp-action="Create">Criar agendamento</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Início Previsto
+            </th>
+            <th>
+                Final Previsto
+            </th>
+            <th>
+                Início realizado
+            </th>
+            <th>
+                Final realizado
+            </th>
+            <th>
+                Km final
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Motorista
+            </th>
+            <th>
+                Veículo
+            </th>
+            <th>
+                Rota
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpectedStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpectedEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDatePerformed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDatePerformed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndKm)
+                </td>
+                <td>
+                    @if (item.IdStatusSchedulingNavigation != null && item.IdStatusSchedulingNavigation.Description != null)
+                    { 
+                        @Html.DisplayFor(modelItem => item.IdStatusSchedulingNavigation.Description)
+                    }
+                </td>
+                <td>
+                    @if (item.IdDriverNavigation != null && item.IdDriverNavigation.DriverDesc != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.IdDriverNavigation.DriverDesc)
+                    }
+                </td>
+                <td>
+                    @if (item.IdVehicleNavigation != null && item.IdVehicleNavigation.Model != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.IdVehicleNavigation.Model)
+                    }
+                </td>
+                <td>
+                    @if (item.IdRouteNavigation != null && item.IdRouteNavigation.RouteDesc != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.IdRouteNavigation.RouteDesc)
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdScheduling">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
