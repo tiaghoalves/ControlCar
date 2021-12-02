@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace ControlCar
 {
@@ -25,8 +27,14 @@ namespace ControlCar
 
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             {
+                string root = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                string[] credentials = File.ReadAllLines(@$"{root}\credenditals.txt");
+                string connectionString = Configuration.GetConnectionString("ControlCarDBProd")
+                        .Replace("{0}", credentials[0])    
+                        .Replace("{1}", credentials[1]);
+
                 services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ControlCarDBProd")));
+                    options.UseSqlServer(connectionString));
             }
             else
             {
